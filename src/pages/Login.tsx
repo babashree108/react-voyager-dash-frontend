@@ -5,17 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { mockUsers } from '@/data/mockData';
-import { CheckCircle2, Lock, Mail, Shield } from 'lucide-react';
-import { UserRole } from '@/types';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [role, setRole] = useState<UserRole>('student');
-  const [email, setEmail] = useState('');
+  const [role, setRole] = useState<'orgadmin' | 'teacher' | 'student'>('orgadmin');
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleLogin = () => {
     const user = mockUsers.find(u => u.role === role);
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
@@ -26,131 +21,112 @@ export default function Login() {
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 gradient-primary p-12 text-white flex-col justify-center">
-        <div className="max-w-md">
-          <h1 className="text-5xl font-bold mb-4">Welcome to EduPlatform</h1>
-          <p className="text-lg opacity-95 mb-8 leading-relaxed">
-            Transform your teaching and learning experience with our comprehensive online education platform.
+      <div className="flex-1 gradient-primary flex items-center justify-center p-[60px]">
+        <div className="max-w-md text-white">
+          <h1 className="text-[42px] font-bold mb-4 leading-tight">SaaS Online Teaching Platform</h1>
+          <p className="text-[17px] opacity-95 leading-[1.7] mb-8">
+            Enterprise-grade virtual learning platform with real-time collaboration, digital notebooks, and comprehensive analytics.
           </p>
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <span className="text-base">Live virtual classrooms with HD video</span>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 text-[15px]">
+              <span>✓</span>
+              <span>Live video conferencing with student controls</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <span className="text-base">Digital notebook with Huion Note X10</span>
+            <div className="flex items-center gap-3 text-[15px]">
+              <span>✓</span>
+              <span>Real-time digital notebook capture (Huion integration)</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <span className="text-base">Comprehensive analytics & reporting</span>
+            <div className="flex items-center gap-3 text-[15px]">
+              <span>✓</span>
+              <span>Multi-tenant organization management</span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <span className="text-base">Assignment management & grading</span>
+            <div className="flex items-center gap-3 text-[15px]">
+              <span>✓</span>
+              <span>Advanced analytics and reporting</span>
+            </div>
+            <div className="flex items-center gap-3 text-[15px]">
+              <span>✓</span>
+              <span>Flexible subscription plans</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-background">
-        <div className="w-full max-width-md">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold mb-2">Sign in to your account</h2>
-            <p className="text-muted-foreground">Enter your credentials to access the platform</p>
-          </div>
+      <div className="flex-1 flex items-center justify-center p-[60px] bg-background">
+        <div className="w-full max-w-[420px]">
+          <h2 className="text-[32px] font-bold mb-2 text-[#111827]">Sign In</h2>
+          <p className="text-[#6b7280] mb-8">Access your organization's learning platform</p>
 
-          {/* SSO Buttons */}
           <div className="grid grid-cols-2 gap-3 mb-6">
-            <Button variant="outline" className="w-full">
-              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-              </svg>
-              Google
+            <Button 
+              variant="outline" 
+              className="h-[48px] gap-2 text-[14px] border-[#d1d5db] hover:bg-[#f9fafb]"
+            >
+              <span className="text-base">🔵</span> Google
             </Button>
-            <Button variant="outline" className="w-full">
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              GitHub
+            <Button 
+              variant="outline" 
+              className="h-[48px] gap-2 text-[14px] border-[#d1d5db] hover:bg-[#f9fafb]"
+            >
+              <span className="text-base">🔷</span> Microsoft
             </Button>
           </div>
 
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border"></div>
+              <span className="w-full border-t border-[#e5e7eb]" />
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-background text-muted-foreground">Or continue with</span>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-[#9ca3af]">OR</span>
             </div>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <div className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input 
-                  id="email" 
-                  type="email" 
-                  placeholder="name@example.com"
-                  className="pl-10"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input 
-                  id="password" 
-                  type="password" 
-                  placeholder="••••••••"
-                  className="pl-10"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="role">Login as</Label>
-              <Select value={role} onValueChange={(value: UserRole) => setRole(value)}>
-                <SelectTrigger id="role">
-                  <SelectValue />
+              <Label className="text-[14px] font-medium text-[#374151]">User Role</Label>
+              <Select value={role} onValueChange={(value: any) => setRole(value)}>
+                <SelectTrigger className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg">
+                  <SelectValue placeholder="Select your role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="student">Student</SelectItem>
-                  <SelectItem value="teacher">Teacher</SelectItem>
                   <SelectItem value="orgadmin">Organization Admin</SelectItem>
+                  <SelectItem value="teacher">Teacher</SelectItem>
+                  <SelectItem value="student">Student</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            <Button type="submit" className="w-full gradient-primary text-white font-semibold">
-              Sign in
-            </Button>
-          </form>
+            <div className="space-y-2">
+              <Label className="text-[14px] font-medium text-[#374151]">Email Address</Label>
+              <Input 
+                type="email" 
+                placeholder="you@organization.com" 
+                defaultValue="admin@school.edu"
+                className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg"
+              />
+            </div>
 
-          <div className="mt-6 p-4 bg-warning/10 border border-warning/30 rounded-lg flex items-start gap-3">
-            <Shield className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
-            <div className="text-sm">
-              <p className="font-medium text-warning-foreground">Two-Factor Authentication</p>
-              <p className="text-muted-foreground mt-1">Enable 2FA in settings for enhanced security</p>
+            <div className="space-y-2">
+              <Label className="text-[14px] font-medium text-[#374151]">Password</Label>
+              <Input 
+                type="password" 
+                placeholder="••••••••" 
+                defaultValue="password"
+                className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg"
+              />
+            </div>
+
+            <Button 
+              className="w-full h-[56px] text-[16px] font-semibold rounded-lg"
+              style={{ background: '#4f46e5' }}
+              onClick={handleLogin}
+            >
+              Sign In
+            </Button>
+
+            <div className="bg-[#fef3c7] text-[#92400e] p-4 rounded-lg text-[13px]">
+              🔒 Two-factor authentication enabled
             </div>
           </div>
         </div>

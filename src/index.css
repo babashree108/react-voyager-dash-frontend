@@ -17,16 +17,19 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 9%;
 
-    --primary: 250 65% 60%;
+    /* Primary color matching Figma: #4f46e5 */
+    --primary: 244 63% 58%;
     --primary-foreground: 0 0% 100%;
     
-    --primary-gradient: linear-gradient(135deg, hsl(250 65% 60%), hsl(270 55% 50%));
+    /* Gradient matching Figma */
+    --primary-gradient-start: 253 62% 71%;
+    --primary-gradient-end: 273 42% 55%;
     
     --secondary: 220 13% 96%;
     --secondary-foreground: 220 13% 9%;
 
     --muted: 220 13% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted-foreground: 220 11% 42%;
 
     --accent: 220 13% 96%;
     --accent-foreground: 220 13% 9%;
@@ -34,22 +37,24 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 250 65% 60%;
+    --border: 220 13% 89%;
+    --input: 220 13% 89%;
+    --ring: 244 63% 58%;
 
     --radius: 0.75rem;
     
-    --sidebar-background: 220 17% 12%;
+    /* Sidebar - dark gray from Figma: #1f2937 */
+    --sidebar-background: 217 33% 17%;
     --sidebar-foreground: 220 9% 93%;
-    --sidebar-primary: 250 65% 60%;
+    --sidebar-primary: 244 63% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 16%;
+    --sidebar-accent: 217 33% 16%;
     --sidebar-accent-foreground: 220 9% 93%;
-    --sidebar-border: 220 15% 20%;
-    --sidebar-ring: 250 65% 60%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 244 63% 58%;
     
-    --success: 142 71% 45%;
+    /* Status colors from Figma */
+    --success: 152 69% 45%;
     --success-foreground: 0 0% 100%;
     
     --warning: 38 92% 50%;
@@ -58,17 +63,19 @@ All colors MUST be HSL.
     --info: 221 83% 53%;
     --info-foreground: 0 0% 100%;
     
-    --admin-badge: 0 84% 90%;
-    --admin-badge-foreground: 0 72% 25%;
+    /* Badge colors from Figma */
+    --admin-badge: 0 84% 94%;
+    --admin-badge-foreground: 0 78% 25%;
     
-    --teacher-badge: 221 83% 90%;
-    --teacher-badge-foreground: 221 68% 22%;
+    --teacher-badge: 217 92% 90%;
+    --teacher-badge-foreground: 222 76% 26%;
     
-    --student-badge: 142 71% 90%;
-    --student-badge-foreground: 142 71% 20%;
+    --student-badge: 152 88% 90%;
+    --student-badge-foreground: 157 74% 23%;
     
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Shadows matching Figma */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
     
     --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -121,6 +128,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -131,7 +139,7 @@ All colors MUST be HSL.
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(270 55% 50%));
+    background: linear-gradient(135deg, hsl(var(--primary-gradient-start)), hsl(var(--primary-gradient-end)));
   }
   
   .shadow-card {
@@ -144,5 +152,9 @@ All colors MUST be HSL.
   
   .transition-smooth {
     transition: var(--transition-smooth);
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
   }
 }
