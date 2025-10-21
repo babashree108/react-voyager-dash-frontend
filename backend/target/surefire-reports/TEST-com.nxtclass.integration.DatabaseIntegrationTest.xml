@@ -1,0 +1,3343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.nxtclass.integration.DatabaseIntegrationTest" time="20.646" tests="7" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/workspace/backend/target/test-classes:/workspace/backend/target/classes:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.0/spring-boot-starter-web-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.0/spring-boot-starter-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.0/spring-boot-starter-logging-3.2.0.jar:/home/ubuntu/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/home/ubuntu/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/ubuntu/.m2/repository/org/slf4j/jul-to-slf4j/2.0.9/jul-to-slf4j-2.0.9.jar:/home/ubuntu/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/ubuntu/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.0/spring-boot-starter-json-3.2.0.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.0/spring-boot-starter-tomcat-3.2.0.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.16/tomcat-embed-core-10.1.16.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.16/tomcat-embed-websocket-10.1.16.jar:/home/ubuntu/.m2/repository/org/springframework/spring-web/6.1.1/spring-web-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-beans/6.1.1/spring-beans-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-webmvc/6.1.1/spring-webmvc-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-context/6.1.1/spring-context-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-expression/6.1.1/spring-expression-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.2.0/spring-boot-starter-data-jpa-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-aop/3.2.0/spring-boot-starter-aop-3.2.0.jar:/home/ubuntu/.m2/repository/org/aspectj/aspectjweaver/1.9.20.1/aspectjweaver-1.9.20.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.0/spring-boot-starter-jdbc-3.2.0.jar:/home/ubuntu/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-jdbc/6.1.1/spring-jdbc-6.1.1.jar:/home/ubuntu/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final.jar:/home/ubuntu/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/home/ubuntu/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/home/ubuntu/.m2/repository/org/jboss/logging/jboss-logging/3.5.3.Final/jboss-logging-3.5.3.Final.jar:/home/ubuntu/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final.jar:/home/ubuntu/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2.jar:/home/ubuntu/.m2/repository/com/fasterxml/classmate/1.6.0/classmate-1.6.0.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.4/jaxb-runtime-4.0.4.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.4/jaxb-core-4.0.4.jar:/home/ubuntu/.m2/repository/org/eclipse/angus/angus-activation/2.0.1/angus-activation-2.0.1.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/txw2/4.0.4/txw2-4.0.4.jar:/home/ubuntu/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/home/ubuntu/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/ubuntu/.m2/repository/org/antlr/antlr4-runtime/4.10.1/antlr4-runtime-4.10.1.jar:/home/ubuntu/.m2/repository/org/springframework/data/spring-data-jpa/3.2.0/spring-data-jpa-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/data/spring-data-commons/3.2.0/spring-data-commons-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/spring-orm/6.1.1/spring-orm-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-tx/6.1.1/spring-tx-6.1.1.jar:/home/ubuntu/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/ubuntu/.m2/repository/org/springframework/spring-aspects/6.1.1/spring-aspects-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.2.0/spring-boot-starter-security-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/spring-aop/6.1.1/spring-aop-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-config/6.2.0/spring-security-config-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-web/6.2.0/spring-security-web-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.2.0/spring-boot-starter-validation-3.2.0.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.16/tomcat-embed-el-10.1.16.jar:/home/ubuntu/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar:/home/ubuntu/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.2.0/spring-boot-starter-actuator-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.2.0/spring-boot-actuator-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-actuator/3.2.0/spring-boot-actuator-3.2.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-observation/1.12.0/micrometer-observation-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-commons/1.12.0/micrometer-commons-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-jakarta9/1.12.0/micrometer-jakarta9-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-core/1.12.0/micrometer-core-1.12.0.jar:/home/ubuntu/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/home/ubuntu/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/home/ubuntu/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/home/ubuntu/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/home/ubuntu/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-devtools/3.2.0/spring-boot-devtools-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot/3.2.0/spring-boot-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.0/spring-boot-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-configuration-processor/3.2.0/spring-boot-configuration-processor-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.0/spring-boot-starter-test-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-test/3.2.0/spring-boot-test-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.0/spring-boot-test-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/ubuntu/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/ubuntu/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/ubuntu/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/ubuntu/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/ubuntu/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/ubuntu/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/ubuntu/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/ubuntu/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/ubuntu/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/ubuntu/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/home/ubuntu/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/ubuntu/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/ubuntu/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-core/6.1.1/spring-core-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-jcl/6.1.1/spring-jcl-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-test/6.1.1/spring-test-6.1.1.jar:/home/ubuntu/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-test/6.2.0/spring-security-test-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-core/6.2.0/spring-security-core-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-crypto/6.2.0/spring-security-crypto-6.2.0.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value="UTC"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/workspace/backend/target/surefire/surefirebooter-20251021214631917_3.jar /workspace/backend/target/surefire 2025-10-21T21-46-31_630-jvmRun1 surefire-20251021214631917_1tmp surefire_0-20251021214631917_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/workspace/backend/target/test-classes:/workspace/backend/target/classes:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.0/spring-boot-starter-web-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.0/spring-boot-starter-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.0/spring-boot-starter-logging-3.2.0.jar:/home/ubuntu/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/home/ubuntu/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/ubuntu/.m2/repository/org/slf4j/jul-to-slf4j/2.0.9/jul-to-slf4j-2.0.9.jar:/home/ubuntu/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/ubuntu/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.0/spring-boot-starter-json-3.2.0.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.0/spring-boot-starter-tomcat-3.2.0.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.16/tomcat-embed-core-10.1.16.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.16/tomcat-embed-websocket-10.1.16.jar:/home/ubuntu/.m2/repository/org/springframework/spring-web/6.1.1/spring-web-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-beans/6.1.1/spring-beans-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-webmvc/6.1.1/spring-webmvc-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-context/6.1.1/spring-context-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-expression/6.1.1/spring-expression-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.2.0/spring-boot-starter-data-jpa-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-aop/3.2.0/spring-boot-starter-aop-3.2.0.jar:/home/ubuntu/.m2/repository/org/aspectj/aspectjweaver/1.9.20.1/aspectjweaver-1.9.20.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.0/spring-boot-starter-jdbc-3.2.0.jar:/home/ubuntu/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-jdbc/6.1.1/spring-jdbc-6.1.1.jar:/home/ubuntu/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final.jar:/home/ubuntu/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/home/ubuntu/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/home/ubuntu/.m2/repository/org/jboss/logging/jboss-logging/3.5.3.Final/jboss-logging-3.5.3.Final.jar:/home/ubuntu/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final.jar:/home/ubuntu/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2.jar:/home/ubuntu/.m2/repository/com/fasterxml/classmate/1.6.0/classmate-1.6.0.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.4/jaxb-runtime-4.0.4.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.4/jaxb-core-4.0.4.jar:/home/ubuntu/.m2/repository/org/eclipse/angus/angus-activation/2.0.1/angus-activation-2.0.1.jar:/home/ubuntu/.m2/repository/org/glassfish/jaxb/txw2/4.0.4/txw2-4.0.4.jar:/home/ubuntu/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/home/ubuntu/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/ubuntu/.m2/repository/org/antlr/antlr4-runtime/4.10.1/antlr4-runtime-4.10.1.jar:/home/ubuntu/.m2/repository/org/springframework/data/spring-data-jpa/3.2.0/spring-data-jpa-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/data/spring-data-commons/3.2.0/spring-data-commons-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/spring-orm/6.1.1/spring-orm-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-tx/6.1.1/spring-tx-6.1.1.jar:/home/ubuntu/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/ubuntu/.m2/repository/org/springframework/spring-aspects/6.1.1/spring-aspects-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.2.0/spring-boot-starter-security-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/spring-aop/6.1.1/spring-aop-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-config/6.2.0/spring-security-config-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-web/6.2.0/spring-security-web-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.2.0/spring-boot-starter-validation-3.2.0.jar:/home/ubuntu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.16/tomcat-embed-el-10.1.16.jar:/home/ubuntu/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar:/home/ubuntu/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.2.0/spring-boot-starter-actuator-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.2.0/spring-boot-actuator-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-actuator/3.2.0/spring-boot-actuator-3.2.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-observation/1.12.0/micrometer-observation-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-commons/1.12.0/micrometer-commons-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-jakarta9/1.12.0/micrometer-jakarta9-1.12.0.jar:/home/ubuntu/.m2/repository/io/micrometer/micrometer-core/1.12.0/micrometer-core-1.12.0.jar:/home/ubuntu/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/home/ubuntu/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/home/ubuntu/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/home/ubuntu/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/home/ubuntu/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/home/ubuntu/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/ubuntu/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-devtools/3.2.0/spring-boot-devtools-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot/3.2.0/spring-boot-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.0/spring-boot-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-configuration-processor/3.2.0/spring-boot-configuration-processor-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.0/spring-boot-starter-test-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-test/3.2.0/spring-boot-test-3.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.0/spring-boot-test-autoconfigure-3.2.0.jar:/home/ubuntu/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/ubuntu/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/ubuntu/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/ubuntu/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/ubuntu/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/ubuntu/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/ubuntu/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/ubuntu/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/ubuntu/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/ubuntu/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/ubuntu/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/home/ubuntu/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/ubuntu/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/ubuntu/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-core/6.1.1/spring-core-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-jcl/6.1.1/spring-jcl-6.1.1.jar:/home/ubuntu/.m2/repository/org/springframework/spring-test/6.1.1/spring-test-6.1.1.jar:/home/ubuntu/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-test/6.2.0/spring-security-test-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-core/6.2.0/spring-security-core-6.2.0.jar:/home/ubuntu/.m2/repository/org/springframework/security/spring-security-crypto/6.2.0/spring-security-crypto-6.2.0.jar:"/>
+    <property name="test" value="DatabaseIntegrationTest"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/ubuntu"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="/usr/lib/jvm/java-21-openjdk-amd64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/workspace/backend"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/workspace/backend/target/surefire/surefirebooter-20251021214631917_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.8+9-Ubuntu-0ubuntu125.04.1"/>
+    <property name="user.name" value="ubuntu"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.1.147"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/ubuntu/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-21"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="21.0.8"/>
+    <property name="user.dir" value="/workspace/backend"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="3364"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="21.0.8+9-Ubuntu-0ubuntu125.04.1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[nxt-class-backend] "/>
+  </properties>
+  <testcase name="testUserCreationAndRetrieval" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="1.308">
+    <system-out><![CDATA[21:46:33.959 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.nxtclass.integration.DatabaseIntegrationTest]: DatabaseIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:46:34.275 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.nxtclass.BackendApplication for test class com.nxtclass.integration.DatabaseIntegrationTest
+21:46:34.661 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2025-10-21T21:46:35.499Z  INFO 3364 --- [nxt-class-backend] [           main] c.n.integration.DatabaseIntegrationTest  : Starting DatabaseIntegrationTest using Java 21.0.8 with PID 3364 (started by ubuntu in /workspace/backend)
+2025-10-21T21:46:35.500Z DEBUG 3364 --- [nxt-class-backend] [           main] c.n.integration.DatabaseIntegrationTest  : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-10-21T21:46:35.505Z  INFO 3364 --- [nxt-class-backend] [           main] c.n.integration.DatabaseIntegrationTest  : The following 1 profile is active: "test"
+2025-10-21T21:46:38.132Z  INFO 3364 --- [nxt-class-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-21T21:46:38.284Z  INFO 3364 --- [nxt-class-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 138 ms. Found 4 JPA repository interfaces.
+2025-10-21T21:46:40.279Z  INFO 3364 --- [nxt-class-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-21T21:46:40.419Z  INFO 3364 --- [nxt-class-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-10-21T21:46:40.486Z  INFO 3364 --- [nxt-class-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-21T21:46:41.023Z  INFO 3364 --- [nxt-class-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-21T21:46:41.074Z  INFO 3364 --- [nxt-class-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-21T21:46:41.607Z  INFO 3364 --- [nxt-class-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-10-21T21:46:41.610Z  INFO 3364 --- [nxt-class-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-21T21:46:41.680Z  WARN 3364 --- [nxt-class-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-21T21:46:43.763Z  INFO 3364 --- [nxt-class-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-21T21:46:43.799Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    drop table if exists announcements cascade 
+Hibernate: 
+    drop table if exists announcements cascade 
+2025-10-21T21:46:43.805Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    drop table if exists assignments cascade 
+Hibernate: 
+    drop table if exists assignments cascade 
+2025-10-21T21:46:43.806Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    drop table if exists class_sessions cascade 
+Hibernate: 
+    drop table if exists class_sessions cascade 
+2025-10-21T21:46:43.806Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    drop table if exists users cascade 
+Hibernate: 
+    drop table if exists users cascade 
+2025-10-21T21:46:43.824Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    create table announcements (
+        date date not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        author varchar(255) not null,
+        content TEXT not null,
+        priority varchar(255) not null check (priority in ('LOW','MEDIUM','HIGH')),
+        title varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table announcements (
+        date date not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        author varchar(255) not null,
+        content TEXT not null,
+        priority varchar(255) not null check (priority in ('LOW','MEDIUM','HIGH')),
+        title varchar(255) not null,
+        primary key (id)
+    )
+2025-10-21T21:46:43.865Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    create table assignments (
+        due_date date not null,
+        grade integer,
+        total_points integer not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        description TEXT,
+        status varchar(255) not null check (status in ('PENDING','SUBMITTED','GRADED')),
+        subject varchar(255) not null,
+        title varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table assignments (
+        due_date date not null,
+        grade integer,
+        total_points integer not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        description TEXT,
+        status varchar(255) not null check (status in ('PENDING','SUBMITTED','GRADED')),
+        subject varchar(255) not null,
+        title varchar(255) not null,
+        primary key (id)
+    )
+2025-10-21T21:46:43.873Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    create table class_sessions (
+        date date not null,
+        duration integer not null,
+        participants integer not null,
+        time time(6) not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        status varchar(255) not null check (status in ('UPCOMING','LIVE','COMPLETED')),
+        subject varchar(255) not null,
+        teacher varchar(255) not null,
+        title varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table class_sessions (
+        date date not null,
+        duration integer not null,
+        participants integer not null,
+        time time(6) not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        status varchar(255) not null check (status in ('UPCOMING','LIVE','COMPLETED')),
+        subject varchar(255) not null,
+        teacher varchar(255) not null,
+        title varchar(255) not null,
+        primary key (id)
+    )
+2025-10-21T21:46:43.886Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    create table users (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        avatar_url varchar(255),
+        email varchar(255) not null unique,
+        name varchar(255) not null,
+        organization varchar(255),
+        password varchar(255) not null,
+        role varchar(255) not null check (role in ('ORGADMIN','TEACHER','STUDENT')),
+        status varchar(255) not null check (status in ('ACTIVE','INACTIVE')),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        avatar_url varchar(255),
+        email varchar(255) not null unique,
+        name varchar(255) not null,
+        organization varchar(255),
+        password varchar(255) not null,
+        role varchar(255) not null check (role in ('ORGADMIN','TEACHER','STUDENT')),
+        status varchar(255) not null check (status in ('ACTIVE','INACTIVE')),
+        primary key (id)
+    )
+2025-10-21T21:46:43.903Z  INFO 3364 --- [nxt-class-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-21T21:46:44.862Z  INFO 3364 --- [nxt-class-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-21T21:46:46.619Z  WARN 3364 --- [nxt-class-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-21T21:46:46.732Z DEBUG 3364 --- [nxt-class-backend] [           main] swordEncoderAuthenticationManagerBuilder : No authenticationProviders and no parentAuthenticationManager defined. Returning null.
+2025-10-21T21:46:48.424Z  INFO 3364 --- [nxt-class-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-10-21T21:46:48.585Z  INFO 3364 --- [nxt-class-backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@597050fa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7511e348, org.springframework.security.web.context.SecurityContextHolderFilter@2e3334d, org.springframework.security.web.header.HeaderWriterFilter@65314e4, org.springframework.web.filter.CorsFilter@268bb09d, org.springframework.security.web.authentication.logout.LogoutFilter@40afa4f1, com.nxtclass.config.SecurityConfig$JwtAuthenticationFilter@1780bc15, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ff1e20b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b75b77d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4c2cc99f, org.springframework.security.web.session.SessionManagementFilter@d7b20d9, org.springframework.security.web.access.ExceptionTranslationFilter@28023029, org.springframework.security.web.access.intercept.AuthorizationFilter@2936f48a]
+2025-10-21T21:46:49.828Z  INFO 3364 --- [nxt-class-backend] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-10-21T21:46:50.181Z  INFO 3364 --- [nxt-class-backend] [           main] c.n.integration.DatabaseIntegrationTest  : Started DatabaseIntegrationTest in 15.548 seconds (process running for 18.106)
+2025-10-21T21:46:50.553Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        users u1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0
+2025-10-21T21:46:51.060Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:51.268Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:51.454Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:51.656Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:51.866Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.075Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.103Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.114Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.125Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.142Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.150Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.158Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.164Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.172Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.176Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:52.179Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.293Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.344Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.354Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.368Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.383Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.461Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.468Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.470Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.470Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.474Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.475Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.476Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.476Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.477Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.477Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.482Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.483Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.484Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.484Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.485Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.485Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.486Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="testClassSessionCreationAndStatusFiltering" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.129">
+    <system-out><![CDATA[2025-10-21T21:46:53.545Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.559Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.564Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.568Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.571Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.588Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.594Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.600Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.608Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.609Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.609Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.614Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.615Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.616Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.616Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.621Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.622Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.622Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.623Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.623Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.624Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.628Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.629Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.629Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.630Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+2025-10-21T21:46:53.637Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+2025-10-21T21:46:53.644Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.status=?
+]]></system-out>
+  </testcase>
+  <testcase name="testDataIntegrityAndConstraints" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.06">
+    <system-out><![CDATA[2025-10-21T21:46:53.676Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.681Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.685Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.689Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.692Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.700Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.701Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.702Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.702Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.703Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.703Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.704Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.708Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.708Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.709Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.713Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.714Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.714Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.715Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.715Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.716Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.716Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+]]></system-out>
+  </testcase>
+  <testcase name="testUpcomingClassesQuery" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.127">
+    <system-out><![CDATA[2025-10-21T21:46:53.747Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.760Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.769Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.777Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.785Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.795Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.802Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.805Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        class_sessions
+        (created_at, date, duration, participants, status, subject, teacher, time, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.823Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.824Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.824Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.828Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.829Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.829Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.830Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.831Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.831Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.836Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.837Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.837Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.838Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.838Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.839Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.839Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.845Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.date>=? 
+    order by
+        cs1_0.date,
+        cs1_0.time
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0 
+    where
+        cs1_0.date>=? 
+    order by
+        cs1_0.date,
+        cs1_0.time
+]]></system-out>
+  </testcase>
+  <testcase name="testUserRoleFiltering" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.104">
+    <system-out><![CDATA[2025-10-21T21:46:53.866Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.876Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.880Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.890Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.897Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.904Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.909Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        users
+        (avatar_url, created_at, email, name, organization, password, role, status, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.921Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.922Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.923Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.923Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.924Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.925Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.925Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.933Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.934Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:53.934Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.935Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.935Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.936Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:53.936Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.937Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.937Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:53.938Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+2025-10-21T21:46:53.945Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+2025-10-21T21:46:53.952Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.role=?
+]]></system-out>
+  </testcase>
+  <testcase name="testAssignmentCreationAndStatusFiltering" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.076">
+    <system-out><![CDATA[2025-10-21T21:46:53.971Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:53.976Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:53.979Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:53.982Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:53.985Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.987Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.989Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        assignments
+        (created_at, description, due_date, grade, status, subject, title, total_points, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:53.997Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:53.998Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.002Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.003Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.003Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.004Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.005Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.005Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.005Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.009Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.010Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.011Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.011Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.012Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.012Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.013Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.013Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+2025-10-21T21:46:54.024Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+2025-10-21T21:46:54.027Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0 
+    where
+        a1_0.status=?
+]]></system-out>
+  </testcase>
+  <testcase name="testAnnouncementCreationAndPriorityFiltering" classname="com.nxtclass.integration.DatabaseIntegrationTest" time="0.089">
+    <system-out><![CDATA[2025-10-21T21:46:54.052Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.organization,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at 
+    from
+        users u1_0
+2025-10-21T21:46:54.065Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+Hibernate: 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.date,
+        cs1_0.duration,
+        cs1_0.participants,
+        cs1_0.status,
+        cs1_0.subject,
+        cs1_0.teacher,
+        cs1_0.time,
+        cs1_0.title,
+        cs1_0.updated_at 
+    from
+        class_sessions cs1_0
+2025-10-21T21:46:54.073Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.created_at,
+        a1_0.description,
+        a1_0.due_date,
+        a1_0.grade,
+        a1_0.status,
+        a1_0.subject,
+        a1_0.title,
+        a1_0.total_points,
+        a1_0.updated_at 
+    from
+        assignments a1_0
+2025-10-21T21:46:54.081Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0
+2025-10-21T21:46:54.091Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:54.093Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:54.095Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        announcements
+        (author, content, created_at, date, priority, title, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+2025-10-21T21:46:54.103Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.107Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.108Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.108Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.109Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.109Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-10-21T21:46:54.114Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.115Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.115Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        class_sessions 
+    where
+        id=?
+2025-10-21T21:46:54.116Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.116Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.121Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.122Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        assignments 
+    where
+        id=?
+2025-10-21T21:46:54.122Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.123Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.123Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        announcements 
+    where
+        id=?
+2025-10-21T21:46:54.124Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+2025-10-21T21:46:54.127Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+2025-10-21T21:46:54.129Z DEBUG 3364 --- [nxt-class-backend] [           main] org.hibernate.SQL                        : 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.author,
+        a1_0.content,
+        a1_0.created_at,
+        a1_0.date,
+        a1_0.priority,
+        a1_0.title,
+        a1_0.updated_at 
+    from
+        announcements a1_0 
+    where
+        a1_0.priority=?
+]]></system-out>
+  </testcase>
+</testsuite>
