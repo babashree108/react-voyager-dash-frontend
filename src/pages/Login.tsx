@@ -23,7 +23,7 @@ export default function Login() {
       {/* Left Side - Branding */}
       <div className="flex-1 gradient-primary flex items-center justify-center p-[60px]">
         <div className="max-w-md text-white">
-          <h1 className="text-[42px] font-bold mb-4 leading-tight">SaaS Online Teaching Platform</h1>
+          <h1 className="text-[42px] font-bold mb-4 leading-tight">NXT Class</h1>
           <p className="text-[17px] opacity-95 leading-[1.7] mb-8">
             Enterprise-grade virtual learning platform with real-time collaboration, digital notebooks, and comprehensive analytics.
           </p>
