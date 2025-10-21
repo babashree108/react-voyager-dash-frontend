@@ -1,5 +1,23 @@
 import { User, ClassSession, Assignment, Announcement, Stat } from '@/types';
+import { DataService } from '@/api/services/data.service';
 
+const dataService = DataService.getInstance();
+
+// Function to fetch data with fallback to mock data
+const fetchWithFallback = async <T>(
+  fetchFn: () => Promise<T>,
+  mockData: T
+): Promise<T> => {
+  try {
+    const data = await fetchFn();
+    return data;
+  } catch (error) {
+    console.warn('Falling back to mock data:', error);
+    return mockData;
+  }
+};
+
+// Mock data (will be used as fallback)
 export const mockUsers: User[] = [
   {
     id: '1',
@@ -170,3 +188,39 @@ export const studentStats: Stat[] = [
   { label: 'Overall Grade', value: 'A-', change: '+2%', trend: 'up' },
   { label: 'Attendance', value: '95%', change: 'Excellent', trend: 'up' }
 ];
+
+// Data fetching functions with mock fallback
+export const getUsers = () => fetchWithFallback(
+  () => dataService.getAll<User>('users'),
+  mockUsers
+);
+
+export const getClasses = () => fetchWithFallback(
+  () => dataService.getAll<ClassSession>('classes'),
+  mockClasses
+);
+
+export const getAssignments = () => fetchWithFallback(
+  () => dataService.getAll<Assignment>('assignments'),
+  mockAssignments
+);
+
+export const getAnnouncements = () => fetchWithFallback(
+  () => dataService.getAll<Announcement>('announcements'),
+  mockAnnouncements
+);
+
+export const getOrgAdminStats = () => fetchWithFallback(
+  () => dataService.queryStats<Stat>('orgadmin'),
+  orgAdminStats
+);
+
+export const getTeacherStats = () => fetchWithFallback(
+  () => dataService.queryStats<Stat>('teacher'),
+  teacherStats
+);
+
+export const getStudentStats = () => fetchWithFallback(
+  () => dataService.queryStats<Stat>('student'),
+  studentStats
+);
