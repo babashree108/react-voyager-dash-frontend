@@ -1,0 +1,8 @@
+/workspace/backend/src/test/java/com/nxtclass/service/UserServiceTest.java
+/workspace/backend/src/test/java/com/nxtclass/TestRunner.java
+/workspace/backend/src/test/java/com/nxtclass/controller/StatsControllerTest.java
+/workspace/backend/src/test/java/com/nxtclass/integration/UserIntegrationTest.java
+/workspace/backend/src/test/java/com/nxtclass/service/JwtServiceTest.java
+/workspace/backend/src/test/java/com/nxtclass/controller/UserControllerTest.java
+/workspace/backend/src/test/java/com/nxtclass/controller/AuthControllerTest.java
+/workspace/backend/src/test/java/com/nxtclass/integration/DatabaseIntegrationTest.java
