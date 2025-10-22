@@ -4,12 +4,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "class_sessions")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClassSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,9 +72,7 @@ public class ClassSession {
         updatedAt = LocalDateTime.now();
     }
 
-    // Constructors
-    public ClassSession() {}
-
+    // Custom constructor for convenience
     public ClassSession(String title, String teacher, String subject, LocalDate date, 
                        LocalTime time, Integer duration, Integer participants) {
         this.title = title;
@@ -75,94 +82,5 @@ public class ClassSession {
         this.time = time;
         this.duration = duration;
         this.participants = participants;
-    }
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public Integer getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(Integer participants) {
-        this.participants = participants;
-    }
-
-    public SessionStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(SessionStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

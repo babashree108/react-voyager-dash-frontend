@@ -1,51 +1,24 @@
 package com.nxtclass.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class StatDto {
     private String label;
     private Object value;
     private String change;
     private String trend;
 
-    // Constructors
-    public StatDto() {}
-
+    // Custom constructor for convenience
     public StatDto(String label, Object value, String change, String trend) {
         this.label = label;
         this.value = value;
         this.change = change;
-        this.trend = trend;
-    }
-
-    // Getters and Setters
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public String getChange() {
-        return change;
-    }
-
-    public void setChange(String change) {
-        this.change = change;
-    }
-
-    public String getTrend() {
-        return trend;
-    }
-
-    public void setTrend(String trend) {
         this.trend = trend;
     }
 }
