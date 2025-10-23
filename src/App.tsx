@@ -16,6 +16,8 @@ import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 import Students from "./pages/Students";
 import StudentForm from "./pages/StudentForm";
+import Teachers from "./pages/Teachers";
+import TeacherForm from "./pages/TeacherForm";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,10 @@ const App = () => (
           <Route path="/students" element={<Students />} />
           <Route path="/students/add" element={<StudentForm />} />
           <Route path="/students/edit/:id" element={<StudentForm />} />
+          
+          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/teachers/add" element={<TeacherForm />} />
+          <Route path="/teachers/edit/:id" element={<TeacherForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
