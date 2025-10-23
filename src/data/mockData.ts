@@ -184,7 +184,7 @@ export const teacherStats: Stat[] = [
 
 export const studentStats: Stat[] = [
   { label: 'Enrolled Classes', value: 6, change: 'On track', trend: 'up' },
-  { label: 'Assignments Due', value: 3, change: 'This week', trend: 'up' },
+  { label: 'Assignments Due', value: 1, change: 'This week', trend: 'up' },
   { label: 'Overall Grade', value: 'A-', change: '+2%', trend: 'up' },
   { label: 'Attendance', value: '95%', change: 'Excellent', trend: 'up' }
 ];
@@ -215,12 +215,49 @@ export const getOrgAdminStats = () => fetchWithFallback(
   orgAdminStats
 );
 
-export const getTeacherStats = () => fetchWithFallback(
-  () => dataService.queryStats<Stat>('teacher'),
-  teacherStats
-);
+export const getTeacherStats = async () => {
+  const studentCount = await getStudentCount();
+  const updatedTeacherStats = [...teacherStats];
+  const studentStatIndex = updatedTeacherStats.findIndex(stat => stat.label === 'Total Students');
+  if (studentStatIndex !== -1) {
+    updatedTeacherStats[studentStatIndex] = {
+      ...updatedTeacherStats[studentStatIndex],
+      value: studentCount
+    };
+  }
+  return fetchWithFallback(
+    () => dataService.queryStats<Stat>('teacher'),
+    updatedTeacherStats
+  );
+};
 
 export const getStudentStats = () => fetchWithFallback(
   () => dataService.queryStats<Stat>('student'),
   studentStats
 );
+
+// Function to get student count from the backend
+export const getStudentCount = () => fetchWithFallback(
+  async () => {
+    const response = await dataService.getById<number>('student-details', 'count');
+    return response;
+  },
+  mockUsers.filter(user => user.role === 'student').length
+);
+
+// In mockData.ts
+
+export const getStatsForRole = async (role: string) => {
+  switch (role) {
+    case 'orgadmin':
+      return getOrgAdminStats();
+    case 'teacher': {
+      const stats = await getTeacherStats();
+      return stats;
+    }
+    case 'student':
+      return getStudentStats();
+    default:
+      return [];
+  }
+};

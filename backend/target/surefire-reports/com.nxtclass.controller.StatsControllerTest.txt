@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+Test set: com.nxtclass.controller.StatsControllerTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.317 s <<< FAILURE! -- in com.nxtclass.controller.StatsControllerTest
+com.nxtclass.controller.StatsControllerTest.getOrgAdminStats_ShouldReturnCorrectStats -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.nxtclass.controller.StatsControllerTest.getOrgAdminStats_ShouldReturnCorrectStats(StatsControllerTest.java:46)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+com.nxtclass.controller.StatsControllerTest.getStudentStats_ShouldReturnCorrectStats -- Time elapsed: 0.002 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.nxtclass.controller.StatsControllerTest.getStudentStats_ShouldReturnCorrectStats(StatsControllerTest.java:87)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+com.nxtclass.controller.StatsControllerTest.getTeacherStats_ShouldReturnCorrectStats -- Time elapsed: 0.002 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.nxtclass.controller.StatsControllerTest.getTeacherStats_ShouldReturnCorrectStats(StatsControllerTest.java:67)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
