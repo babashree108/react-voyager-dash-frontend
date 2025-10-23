@@ -5,8 +5,8 @@ import StatCard from '@/components/StatCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { User } from '@/types';
-import { mockClasses, orgAdminStats, teacherStats, studentStats, getStudentCount } from '@/data/mockData';
+import { Stat, User } from '@/types';
+import { mockClasses, orgAdminStats, teacherStats, studentStats, getStudentCount, getStatsForRole } from '@/data/mockData';
 import { Calendar, Clock, Users, Video } from 'lucide-react';
 
 export default function Dashboard() {
@@ -14,6 +14,17 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [studentCount, setStudentCount] = useState<number>(0);
 
+
+const [stats, setStats] = useState<Stat[]>([]);
+
+useEffect(() => {
+  if (!user) return;
+  const fetchStats = async () => {
+    const statsData = await getStatsForRole(user.role);
+    setStats(statsData);
+  };
+  fetchStats();
+}, [user]);
   // Fetch student count
   useEffect(() => {
     const fetchStudentCount = async () => {
@@ -28,6 +39,8 @@ export default function Dashboard() {
 
     fetchStudentCount();
   }, []);
+
+  
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -72,11 +85,12 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {getStats().map((stat, index) => (
-            <StatCard key={index} stat={stat} />
-          ))}
-        </div>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  {stats.map((stat, index) => (
+    <StatCard key={index} stat={stat} />
+  ))}
+</div>
+
 
         {/* Classes/Sessions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
