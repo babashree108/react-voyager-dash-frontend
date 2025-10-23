@@ -224,3 +224,12 @@ export const getStudentStats = () => fetchWithFallback(
   () => dataService.queryStats<Stat>('student'),
   studentStats
 );
+
+// Function to get student count from the backend
+export const getStudentCount = () => fetchWithFallback(
+  async () => {
+    const response = await dataService.getById<number>('student-details', 'count');
+    return response;
+  },
+  mockUsers.filter(user => user.role === 'student').length
+);

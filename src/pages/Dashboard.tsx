@@ -6,12 +6,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { User } from '@/types';
-import { mockClasses, orgAdminStats, teacherStats, studentStats } from '@/data/mockData';
+import { mockClasses, orgAdminStats, teacherStats, studentStats, getStudentCount } from '@/data/mockData';
 import { Calendar, Clock, Users, Video } from 'lucide-react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [studentCount, setStudentCount] = useState<number>(0);
+
+  // Fetch student count
+  useEffect(() => {
+    const fetchStudentCount = async () => {
+      try {
+        const count = await getStudentCount();
+        console.log('Student Count:', count); // Console log the count
+        setStudentCount(count);
+      } catch (error) {
+        console.error('Error fetching student count:', error);
+      }
+    };
+
+    fetchStudentCount();
+  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
