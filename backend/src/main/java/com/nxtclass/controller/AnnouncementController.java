@@ -1,7 +1,6 @@
 package com.nxtclass.controller;
 
 import com.nxtclass.entity.Announcement;
-import com.nxtclass.entity.Priority;
 import com.nxtclass.repository.AnnouncementRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/announcements")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AnnouncementController {
     
     @Autowired
@@ -34,11 +32,6 @@ public class AnnouncementController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/priority/{priority}")
-    public ResponseEntity<List<Announcement>> getAnnouncementsByPriority(@PathVariable Priority priority) {
-        List<Announcement> announcements = announcementRepository.findByPriority(priority);
-        return ResponseEntity.ok(announcements);
-    }
 
     @GetMapping("/author/{author}")
     public ResponseEntity<List<Announcement>> getAnnouncementsByAuthor(@PathVariable String author) {

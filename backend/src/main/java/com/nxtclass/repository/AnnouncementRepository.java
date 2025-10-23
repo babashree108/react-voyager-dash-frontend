@@ -1,7 +1,6 @@
 package com.nxtclass.repository;
 
 import com.nxtclass.entity.Announcement;
-import com.nxtclass.entity.Priority;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,8 +11,7 @@ import java.util.List;
 
 @Repository
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
-    List<Announcement> findByPriority(Priority priority);
-    
+
     List<Announcement> findByAuthor(String author);
     
     List<Announcement> findByDate(LocalDate date);

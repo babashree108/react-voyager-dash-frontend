@@ -1,37 +1,37 @@
 -------------------------------------------------------------------------------
 Test set: com.nxtclass.controller.AuthControllerTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 1.248 s <<< FAILURE! -- in com.nxtclass.controller.AuthControllerTest
-com.nxtclass.controller.AuthControllerTest.login_WithValidCredentials_ShouldReturnLoginResponse -- Time elapsed: 0.034 s <<< FAILURE!
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.177 s <<< FAILURE! -- in com.nxtclass.controller.AuthControllerTest
+com.nxtclass.controller.AuthControllerTest.login_WithValidCredentials_ShouldReturnLoginResponse -- Time elapsed: 0.004 s <<< FAILURE!
 java.lang.AssertionError: Status expected:<200> but was:<403>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
 	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
 	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
 	at com.nxtclass.controller.AuthControllerTest.login_WithValidCredentials_ShouldReturnLoginResponse(AuthControllerTest.java:46)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-com.nxtclass.controller.AuthControllerTest.login_WithInvalidCredentials_ShouldReturnBadRequest -- Time elapsed: 0.022 s <<< FAILURE!
+com.nxtclass.controller.AuthControllerTest.login_WithInvalidCredentials_ShouldReturnBadRequest -- Time elapsed: 0.003 s <<< FAILURE!
 java.lang.AssertionError: Status expected:<400> but was:<403>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
 	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
 	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
 	at com.nxtclass.controller.AuthControllerTest.login_WithInvalidCredentials_ShouldReturnBadRequest(AuthControllerTest.java:66)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-com.nxtclass.controller.AuthControllerTest.login_WithInvalidRequest_ShouldReturnBadRequest -- Time elapsed: 0.016 s <<< FAILURE!
+com.nxtclass.controller.AuthControllerTest.login_WithInvalidRequest_ShouldReturnBadRequest -- Time elapsed: 0.002 s <<< FAILURE!
 java.lang.AssertionError: Status expected:<400> but was:<403>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
 	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
 	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
 	at com.nxtclass.controller.AuthControllerTest.login_WithInvalidRequest_ShouldReturnBadRequest(AuthControllerTest.java:78)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
