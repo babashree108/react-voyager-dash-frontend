@@ -14,6 +14,8 @@ import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
+import Students from "./pages/Students";
+import StudentForm from "./pages/StudentForm";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,9 @@ const App = () => (
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/students/add" element={<StudentForm />} />
+          <Route path="/students/edit/:id" element={<StudentForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

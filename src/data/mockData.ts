@@ -184,7 +184,7 @@ export const teacherStats: Stat[] = [
 
 export const studentStats: Stat[] = [
   { label: 'Enrolled Classes', value: 6, change: 'On track', trend: 'up' },
-  { label: 'Assignments Due', value: 3, change: 'This week', trend: 'up' },
+  { label: 'Assignments Due', value: 1, change: 'This week', trend: 'up' },
   { label: 'Overall Grade', value: 'A-', change: '+2%', trend: 'up' },
   { label: 'Attendance', value: '95%', change: 'Excellent', trend: 'up' }
 ];
