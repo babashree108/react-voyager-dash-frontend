@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BASE_URL = 'http://localhost:8080'; // Replace with your backend URL
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export class ApiService {
   private static instance: ApiService;
