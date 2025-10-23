@@ -40,6 +40,7 @@ export const navigationConfig: Record<UserRole, NavSection[]> = {
       items: [
         { href: '/users', label: 'Users', icon: Users },
         { href: '/students', label: 'Students', icon: Users },
+        { href: '/teachers', label: 'Teachers', icon: Users },
         { href: '/classroom', label: 'Classrooms', icon: Video },
         { href: '/assignments', label: 'Scheduling', icon: Calendar },
       ]
