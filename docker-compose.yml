@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  database:
+    image: postgres:15-alpine
+    container_name: nxtclass-db
+    environment:
+      POSTGRES_DB: nxtclass
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nxtclass-network
+
+  # Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nxtclass-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://database:5432/nxtclass
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      FRONTEND_URL: http://localhost:3000
+    ports:
+      - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - nxtclass-network
+
+  # Frontend Service
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nxtclass-frontend
+    environment:
+      VITE_API_URL: http://localhost:8080/api
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - nxtclass-network
+
+volumes:
+  postgres_data:
+
+networks:
+  nxtclass-network:
+    driver: bridge
