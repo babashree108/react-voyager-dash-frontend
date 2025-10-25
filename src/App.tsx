@@ -17,7 +17,9 @@ import NotFound from "./pages/NotFound";
 import Students from "./pages/Students";
 import StudentForm from "./pages/StudentForm";
 import Teachers from "./pages/Teachers";
+import Subject from "./pages/Subject";
 import TeacherForm from "./pages/TeacherForm";
+import SubjectForm from "./pages/SubjectForm";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,9 @@ const App = () => (
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/teachers/add" element={<TeacherForm />} />
           <Route path="/teachers/edit/:id" element={<TeacherForm />} />
+          <Route path="/subject" element={<Subject />} />
+          <Route path="/subject/add" element={<SubjectForm />} />
+          <Route path="/subject/edit/:id" element={<SubjectForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
