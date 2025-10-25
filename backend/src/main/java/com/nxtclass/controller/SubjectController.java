@@ -43,7 +43,7 @@ public class SubjectController {
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/{identifier}")
+    @GetMapping("details/{identifier}")
     public ResponseEntity<?> details(@PathVariable Long identifier) {
         try {
             SubjectDTO dto = subjectAPI.details(identifier);
@@ -53,7 +53,7 @@ public class SubjectController {
         }
     }
 
-    @DeleteMapping("/{identifier}")
+    @DeleteMapping("delete/{identifier}")
     public ResponseEntity<String> delete(@PathVariable Long identifier) {
         try {
             String result = subjectAPI.delete(identifier);
