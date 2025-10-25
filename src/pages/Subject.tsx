@@ -1,6 +1,6 @@
-import DashboardLayout from "@/components/DashboardLayout";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from '@/components/ui/button';
 import { Plus, MoreVertical } from 'lucide-react';
 import {
@@ -17,12 +17,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { subjectService } from '@/api/subejct.service';
+import { subjectService } from '@/api/services/subejct.service';
 import { useToast } from '@/hooks/use-toast';
+
 export default function Subject() {
-     const navigate = useNavigate();
+  const navigate = useNavigate();
   const { toast } = useToast();
-  const [subjects, setSubject] = useState([]);
+
+  const [subjects, setSubjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,23 +34,24 @@ export default function Subject() {
   });
 
   useEffect(() => {
-    const fetchSubject = async () => {
+    const fetchSubjects = async () => {
       try {
         setLoading(true);
         setError(null);
         const data = await subjectService.list();
-        setSubject(data);
+        setSubjects(data);
       } catch (error) {
-        console.error('Error fetching subject:', error);
+        console.error('Error fetching subjects:', error);
         setError('Failed to load subjects. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchSubject();
+    fetchSubjects();
   }, []);
 
+  // ✅ Redirect to login if user is not authorized
   if (!user || user.role !== 'orgadmin') {
     navigate('/login');
     return null;
@@ -57,22 +60,22 @@ export default function Subject() {
   const handleAction = async (action: string, subjectId: number) => {
     switch (action) {
       case 'edit':
-        navigate(`/subejct/edit/${subjectId}`);
+        navigate(`/subject/edit/${subjectId}`);
         break;
       case 'delete':
         try {
           await subjectService.delete(subjectId);
           toast({
             title: "Success",
-            description: "Subejct deleted successfully",
+            description: "Subject deleted successfully",
           });
-          // Refresh the list
-          const updatedSubejct= subjects.filter((t: any) => t.identifier !== subjectId);
-          setSubject(updatedSubject);
+          // ✅ Update local state to reflect deletion
+          const updatedSubjects = subjects.filter((t: any) => t.identifier !== subjectId);
+          setSubjects(updatedSubjects);
         } catch (error) {
           toast({
             title: "Error",
-            description: "Failed to delete subejct",
+            description: "Failed to delete subject",
             variant: "destructive",
           });
         }
@@ -81,7 +84,8 @@ export default function Subject() {
         break;
     }
   };
-      return (
+
+  return (
     <DashboardLayout userRole={user.role} userName={user.name}>
       <div className="p-8">
         <div className="flex justify-between items-center mb-8">
@@ -105,7 +109,7 @@ export default function Subject() {
             <TableHeader>
               <TableRow>
                 <TableHead>Subject</TableHead>
-                <TableHead className="w-[80px]">Actions</TableHead>
+                <TableHead className="w-[80px] text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -127,16 +131,14 @@ export default function Subject() {
               ) : subjects.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8">
-                    No subejct found. Click "Add Subject" to create one.
+                    No subjects found. Click "Add Subject" to create one.
                   </TableCell>
                 </TableRow>
               ) : (
-                subjects.map((subejct: any) => (
-                  <TableRow key={subejct.identifier}>
-                    <TableCell>
-                      {subejct.subject}
-                    </TableCell>
-                    <TableCell>
+                subjects.map((subject: any) => (
+                  <TableRow key={subject.identifier}>
+                    <TableCell>{subject.subject}</TableCell>
+                    <TableCell className="text-center">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
@@ -148,15 +150,15 @@ export default function Subject() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem
-                            onClick={() => handleAction('edit', subejct.identifier)}
+                            onClick={() => handleAction('edit', subject.identifier)}
                           >
                             Edit Subject
                           </DropdownMenuItem>
                           <DropdownMenuItem
-                            onClick={() => handleAction('delete', subejct.identifier)}
+                            onClick={() => handleAction('delete', subject.identifier)}
                             className="text-red-600"
                           >
-                            Delete subject
+                            Delete Subject
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
