@@ -1,4 +1,12 @@
 package com.nxtclass.dto;
 
-public class CourseDTO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class CourseDTO extends BaseDTO{
+
+    private String course;
+
 }

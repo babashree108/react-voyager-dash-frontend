@@ -1,4 +1,14 @@
-package com.nxtclass.domain;
+package com.nxtclass.entity;
 
-public class Course {
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+public class Course extends BaseDomain{
+
+    private String course;
+
 }

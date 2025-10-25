@@ -1,7 +1,7 @@
 package com.nxtclass.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nxtclass.domain.Subject;
+import com.nxtclass.entity.Subject;
 import com.nxtclass.dto.SubjectDTO;
 import com.nxtclass.repository.SubjectRepository;
 import lombok.RequiredArgsConstructor;

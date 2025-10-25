@@ -1,6 +1,6 @@
 package com.nxtclass.repository;
 
-import com.nxtclass.domain.Subject;
+import com.nxtclass.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
