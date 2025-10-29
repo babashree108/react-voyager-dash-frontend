@@ -1,8 +1,1 @@
-com/nxtclass/service/JwtServiceTest.class
 com/nxtclass/TestRunner.class
-com/nxtclass/integration/UserIntegrationTest.class
-com/nxtclass/controller/StatsControllerTest.class
-com/nxtclass/controller/UserControllerTest.class
-com/nxtclass/service/UserServiceTest.class
-com/nxtclass/integration/DatabaseIntegrationTest.class
-com/nxtclass/controller/AuthControllerTest.class
