@@ -20,6 +20,8 @@ import Teachers from "./pages/Teachers";
 import Subject from "./pages/Subject";
 import TeacherForm from "./pages/TeacherForm";
 import SubjectForm from "./pages/SubjectForm";
+import Course from "./pages/Course";
+import CourseForm from "./pages/CourseForm";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +53,9 @@ const App = () => (
           <Route path="/subject" element={<Subject />} />
           <Route path="/subject/add" element={<SubjectForm />} />
           <Route path="/subject/edit/:id" element={<SubjectForm />} />
+          <Route path="/course" element={<Course />} />
+          <Route path="/course/add" element={<CourseForm />} />
+          <Route path="/course/edit/:id" element={<CourseForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
