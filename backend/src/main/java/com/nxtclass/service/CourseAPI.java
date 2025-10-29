@@ -30,6 +30,7 @@ public class CourseAPI {
                 ? repo.findById(dto.getIdentifier()).orElse(new Course())
                 : new Course();
         entity.setCourse(dto.getCourse());
+    entity.setDescription(dto.getDescription());
         return repo.save(entity).getIdentifier();
     }
 

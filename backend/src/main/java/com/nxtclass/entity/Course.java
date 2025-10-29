@@ -1,6 +1,8 @@
 package com.nxtclass.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +12,9 @@ import lombok.Setter;
 public class Course extends BaseDomain{
 
     private String course;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
 }

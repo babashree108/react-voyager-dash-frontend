@@ -8,5 +8,6 @@ import lombok.Setter;
 public class CourseDTO extends BaseDTO{
 
     private String course;
+    private String description;
 
 }
