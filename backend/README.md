@@ -18,8 +18,7 @@ A Spring Boot REST API backend for the NXT Class educational platform.
 - Spring Boot 3.2.0
 - Spring Security
 - Spring Data JPA
-- H2 Database (development)
-- PostgreSQL (production)
+- MySQL 8.0
 - JWT for authentication
 - Maven for dependency management
 
@@ -76,57 +75,64 @@ A Spring Boot REST API backend for the NXT Class educational platform.
 ### Prerequisites
 
 - Java 17 or higher
-- Maven 3.6 or higher
-- PostgreSQL (for production)
+- Maven 3.8 or higher
+- MySQL 8.0 or higher
 
 ### Running the Application
 
-1. **Development Mode (H2 Database)**
+1. **Configure Database**
+   - Ensure MySQL is running
+   - Create database: `nxtClass108`
+   - Update `application.properties` with your database credentials
+
+2. **Set Environment Variables**
    ```bash
-   cd backend
-   mvn spring-boot:run
+   export JWT_SECRET=$(openssl rand -base64 64 | tr -d '\n')
+   export DB_URL=jdbc:mysql://localhost:3306/nxtClass108
+   export DB_USERNAME=root
+   export DB_PASSWORD=your_password
    ```
 
-2. **Production Mode (PostgreSQL)**
+3. **Run the Application**
    ```bash
    cd backend
-   mvn spring-boot:run -Dspring.profiles.active=prod
+   mvn clean install
+   mvn spring-boot:run
    ```
 
 The application will start on `http://localhost:8080`
 
-### Database Access
+### Default Login Credentials
 
-- **H2 Console**: `http://localhost:8080/h2-console`
-  - JDBC URL: `jdbc:h2:mem:testdb`
-  - Username: `sa`
-  - Password: `password`
+```
+Admin:
+  Email: admin@nxtclass.com
+  Password: Admin@123
+  Role: ORGADMIN
 
-### Sample Data
+Teacher:
+  Email: teacher@nxtclass.com
+  Password: Admin@123
+  Role: TEACHER
 
-The application automatically initializes with sample data including:
-- 1 Organization Admin
-- 2 Teachers
-- 3 Students
-- Sample class sessions, assignments, and announcements
-
-### Sample Login Credentials
-
-- **Admin**: admin@school.com / password
-- **Teacher**: sarah.j@school.com / password
-- **Student**: emily.d@students.school.com / password
+Student:
+  Email: student@nxtclass.com
+  Password: Admin@123
+  Role: STUDENT
+```
 
 ## Configuration
 
-### Development (application.yml)
-- H2 in-memory database
+### Development (application-dev.properties)
+- MySQL database
 - Detailed logging
-- H2 console enabled
+- Development CORS settings
 
-### Production (application-prod.yml)
-- PostgreSQL database
+### Production (application-prod.properties)
+- MySQL database
 - Environment variable configuration
 - Optimized logging
+- Production CORS settings
 
 ## CORS Configuration
 
@@ -145,9 +151,9 @@ The API follows RESTful conventions and returns JSON responses. All endpoints su
 
 ## Frontend Integration
 
-Update your frontend API service base URL to:
-```typescript
-const BASE_URL = 'http://localhost:8080';
+Configure frontend environment variables:
+```env
+VITE_API_URL=http://localhost:8080/api
 ```
 
-The backend is ready to work with your existing React frontend without any modifications to the frontend code.
+The backend is configured to accept requests from the frontend with proper CORS settings.
