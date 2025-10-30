@@ -1,0 +1,36 @@
+⚡ QUICK FIX - Port 80 Already In Use
+
+YOUR ISSUE:
+===========
+ccbp-ide is using port 80
+nxtclass can't start on port 80
+
+
+FASTEST FIX:
+============
+
+Run this command:
+
+    ./start-on-8081.sh
+
+Wait 5-10 minutes, then open:
+
+    http://localhost:8081
+
+
+WHAT IT DOES:
+=============
+✅ Changes nxtclass to use port 8081
+✅ Builds with Node.js 20 (fixes the error)
+✅ Starts container on port 8081
+✅ Both ccbp-ide and nxtclass run together
+
+
+THAT'S IT:
+==========
+
+    ./start-on-8081.sh
+
+Then access: http://localhost:8081
+
+Done! ✅

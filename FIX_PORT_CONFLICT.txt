@@ -1,0 +1,44 @@
+⚠️  PORT 80 CONFLICT DETECTED!
+
+PROBLEM:
+========
+Port 80 is already used by: ccbp-ide container
+
+Your docker ps shows:
+  b2084ba21189   nxtwave/ccbp-ide:latest
+  PORTS: 0.0.0.0:80->80/tcp  ← PORT 80 IN USE!
+
+That's why nxtclass-local can't start.
+
+
+SOLUTION - CHOOSE ONE:
+=======================
+
+OPTION 1 - Use Different Port (RECOMMENDED)
+--------------------------------------------
+Access nxtclass on port 8081 instead
+
+Run:
+  ./start-on-8081.sh
+
+Then access at: http://localhost:8081
+
+
+OPTION 2 - Stop ccbp-ide Container
+-----------------------------------
+Stop the other container to free port 80
+
+Run:
+  docker stop ccbp-ide
+  ./rebuild-local.sh
+
+Then access at: http://localhost
+
+⚠️  WARNING: This stops your ccbp-ide!
+
+
+RECOMMENDED:
+============
+Use OPTION 1 - Different port (8081)
+
+This way both containers can run together!
