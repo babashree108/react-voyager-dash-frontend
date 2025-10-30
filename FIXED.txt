@@ -1,0 +1,25 @@
+✅ FIXED - Node.js Version Issue
+
+PROBLEM:
+--------
+Ubuntu 22.04 comes with Node.js v12.22.9
+Your frontend requires Node.js >= 18
+
+Error was:
+  npm WARN EBADENGINE current: { node: 'v12.22.9' }
+  vite requires: { node: '^18.0.0 || >=20.0.0' }
+
+SOLUTION:
+---------
+Updated Dockerfile.local to install Node.js 20.x from NodeSource
+
+Changes:
+1. Removed old nodejs/npm from apt-get
+2. Added Node.js 20.x installation from official source
+3. Now installs Node 20 which supports Vite
+
+NOW TRY AGAIN:
+--------------
+./test-local.sh
+
+This will rebuild with Node.js 20 and work properly!
