@@ -71,11 +71,15 @@ git --version
 # Navigate to your preferred directory
 cd /opt
 
-# Clone your repository
+# Clone your monorepo (contains both frontend and backend)
 git clone https://github.com/yourusername/your-repo-name.git nxtclass
 
 # Navigate to project directory
 cd nxtclass
+
+# Verify structure
+ls -la
+# You should see: src/, backend/, docker-compose.yml, etc.
 ```
 
 ---

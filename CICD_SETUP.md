@@ -2,17 +2,20 @@
 
 Complete guide to setup automatic deployment to Hostinger VPS on every push to main branch.
 
+> **Note:** This guide is for **monorepo setup** with smart deployments. Frontend and backend deploy independently based on which files changed.
+
 ---
 
 ## 📋 Overview
 
 When you push to `main` branch:
-1. GitHub Actions triggers automatically
-2. Connects to your Hostinger VPS via SSH
-3. Pulls latest code
-4. Rebuilds Docker images
-5. Restarts services
-6. ✅ Your application is updated!
+1. GitHub Actions detects which files changed (frontend or backend)
+2. Triggers appropriate workflow (frontend-only, backend-only, or both)
+3. Connects to your Hostinger VPS via SSH
+4. Pulls latest code
+5. Rebuilds only the changed service(s)
+6. Restarts only what was rebuilt
+7. ✅ Your application is updated (2-5 min)!
 
 ---
 

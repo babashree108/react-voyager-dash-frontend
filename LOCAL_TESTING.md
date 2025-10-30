@@ -129,6 +129,8 @@ docker-compose ps
 # nxtclass-frontend    Up    0.0.0.0:80->80/tcp
 # nxtclass-backend     Up    0.0.0.0:8080->8080/tcp
 # nxtclass-mysql       Up    0.0.0.0:3306->3306/tcp
+
+# Note: These are the container names from docker-compose.yml
 ```
 
 ### Step 5: View logs
@@ -221,7 +223,7 @@ sudo lsof -i :80
 netstat -ano | findstr :80
 
 # Stop the conflicting service or change ports in docker-compose.yml
-# Edit docker-compose.yml:
+# Edit docker-compose.yml in your project root:
 ports:
   - "8081:80"  # Change 80 to 8081
 
@@ -408,11 +410,13 @@ docker volume prune -f
 # View container resources
 docker stats
 
-# Should show:
+# Should show (approximate values):
 # CONTAINER          CPU %    MEM USAGE
 # nxtclass-frontend  0.5%     50MB
 # nxtclass-backend   2%       500MB
 # nxtclass-mysql     1%       300MB
+
+# Note: These are the container names defined in docker-compose.yml
 ```
 
 ### Load Testing
