@@ -1,73 +1,247 @@
-# Welcome to your Lovable project
+# 🎓 NXT Class - School Management System
 
-## Project info
+A comprehensive digital platform for managing school operations including classroom management, student admissions, course management, and interactive learning tools.
 
-**URL**: https://lovable.dev/projects/8c920548-f4a8-4d84-be42-1953a193e9b9
+## 🚀 Quick Start (5 Minutes)
 
-## How can I edit this code?
+```bash
+# 1. Clone the repository
+git clone <YOUR_REPO_URL>
+cd nxtclass
 
-There are several ways of editing your application.
+# 2. Start with Docker (Recommended)
+./deploy.sh
+# Choose option 1 (Fresh deployment)
 
-**Use Lovable**
+# 3. Access the application
+open http://localhost
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8c920548-f4a8-4d84-be42-1953a193e9b9) and start prompting.
+**That's it!** Your application is now running with:
+- Frontend: http://localhost
+- Backend API: http://localhost:8080
+- Database: MySQL on port 3306
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📖 Documentation
 
-**Use your preferred IDE**
+- **[QUICKSTART.md](./QUICKSTART.md)** - Get running in 5 minutes
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide for Hostinger VPS
+- **[README_DEPLOYMENT.md](./README_DEPLOYMENT.md)** - Docker deployment overview
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🏗️ Architecture
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Tech Stack
 
-Follow these steps:
+**Frontend:**
+- React 18 + TypeScript
+- Vite for build tooling
+- Tailwind CSS + shadcn/ui components
+- React Router for navigation
+- Axios for API calls
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+**Backend:**
+- Java 17 + Spring Boot 3.2
+- Spring Data JPA + Hibernate
+- MySQL 8.0 database
+- JWT authentication
+- RESTful API
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+**DevOps:**
+- Docker + Docker Compose
+- Nginx reverse proxy
+- n8n workflow automation (optional)
 
-# Step 3: Install the necessary dependencies.
-npm i
+### System Architecture
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```
+┌──────────────┐       ┌──────────────┐       ┌──────────────┐
+│   Frontend   │──────▶│   Backend    │──────▶│   MySQL DB   │
+│ React + Vite │       │ Spring Boot  │       │   Database   │
+│  (Port 80)   │       │  (Port 8080) │       │  (Port 3306) │
+└──────────────┘       └──────────────┘       └──────────────┘
+```
+
+## 🎯 Features Implemented
+
+### ✅ Core Features (Complete)
+- User authentication and authorization
+- Role-based access control (Admin, Teacher, Student)
+- Student management (CRUD operations)
+- Teacher management (CRUD operations)
+- Subject management
+- Course management with sections
+- Dashboard for all user roles
+- Responsive UI with modern design
+
+### ⚠️ In Progress
+- Virtual classroom (UI only)
+- Digital notebook (UI only)
+- Assignment system (UI only)
+- Analytics dashboard
+
+### 📋 Planned Features
+- Real-time video/audio (WebRTC)
+- Quiz system with 3-round structure
+- Age-based student admissions
+- Innovation hub for project ideas
+- Multi-language support
+
+See [Feature Progress Analysis](#) for detailed status.
+
+## 🛠️ Development Setup
+
+### Prerequisites
+- Node.js 20+ and npm
+- Java 17+
+- Maven 3.9+
+- MySQL 8.0+
+- Docker & Docker Compose (recommended)
+
+### Local Development (Without Docker)
+
+**Backend:**
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+**Frontend:**
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### With Docker (Recommended)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Build and start all services
+docker-compose up -d
 
-**Use GitHub Codespaces**
+# View logs
+docker-compose logs -f
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Stop all services
+docker-compose down
+```
 
-## What technologies are used for this project?
+## 📦 Project Structure
 
-This project is built with:
+```
+nxtclass/
+├── src/                      # Frontend source
+│   ├── components/          # React components
+│   ├── pages/               # Page components
+│   ├── api/                 # API services
+│   └── types/               # TypeScript types
+├── backend/                  # Backend source
+│   └── src/main/java/       # Java source code
+│       └── com/nxtclass/    # Main package
+├── docker-compose.yml        # Docker orchestration
+├── Dockerfile               # Frontend Docker image
+├── backend/Dockerfile       # Backend Docker image
+└── nginx.conf               # Nginx configuration
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🌐 Deployment
 
-## How can I deploy this project?
+### Deploy to Hostinger VPS
 
-Simply open [Lovable](https://lovable.dev/projects/8c920548-f4a8-4d84-be42-1953a193e9b9) and click on Share -> Publish.
+1. **SSH into your VPS:**
+   ```bash
+   ssh root@your-vps-ip
+   ```
 
-## Can I connect a custom domain to my Lovable project?
+2. **Install Docker:**
+   ```bash
+   curl -fsSL https://get.docker.com | sh
+   ```
 
-Yes, you can!
+3. **Clone and configure:**
+   ```bash
+   git clone <repo> nxtclass && cd nxtclass
+   cp .env.example .env
+   nano .env  # Update with your values
+   ```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+4. **Deploy:**
+   ```bash
+   ./deploy.sh
+   ```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete instructions.
+
+## 🔧 Management Commands
+
+```bash
+# Health check
+./health-check.sh
+
+# View logs
+docker-compose logs -f
+
+# Restart services
+docker-compose restart
+
+# Backup database
+docker-compose exec mysql mysqldump -u root -p nxtclass_db > backup.sql
+
+# Update application
+git pull
+docker-compose build
+docker-compose up -d
+```
+
+## 🔒 Security
+
+- JWT-based authentication
+- BCrypt password hashing
+- CORS configuration
+- Environment-based secrets
+- Non-root Docker containers
+- Security headers in Nginx
+
+## 📊 Current Implementation Status
+
+**Overall Progress: ~25-30%** based on the complete design document
+
+| Module | Status | Progress |
+|--------|--------|----------|
+| Core Infrastructure | ✅ Complete | 90% |
+| User Management | ✅ Complete | 100% |
+| Student/Teacher Onboarding | ✅ Complete | 100% |
+| Virtual Classroom | ⚠️ UI Only | 15% |
+| Digital Notebook | ⚠️ UI Only | 20% |
+| Quiz System | ❌ Not Started | 0% |
+| Innovation Hub | ❌ Not Started | 0% |
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## 📞 Support
+
+- **Issues**: Create an issue on GitHub
+- **Documentation**: Check DEPLOYMENT.md and QUICKSTART.md
+- **Logs**: `docker-compose logs -f`
+
+## 📄 License
+
+This project is proprietary software for NXT Class educational platform.
+
+## 🎉 Quick Links
+
+- **Start Locally**: `./deploy.sh` → option 1
+- **Deploy to VPS**: [DEPLOYMENT.md](./DEPLOYMENT.md)
+- **Health Check**: `./health-check.sh`
+- **View Logs**: `docker-compose logs -f`
+
+---
+
+**Built with ❤️ for modern education**
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
