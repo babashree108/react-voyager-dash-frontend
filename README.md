@@ -150,18 +150,24 @@ docker-compose down
 
 ```
 nxtclass/
-├── src/                      # Frontend source
-│   ├── components/          # React components
-│   ├── pages/               # Page components
-│   ├── api/                 # API services
-│   └── types/               # TypeScript types
-├── backend/                  # Backend source
-│   └── src/main/java/       # Java source code
-│       └── com/nxtclass/    # Main package
-├── docker-compose.yml        # Docker orchestration
-├── Dockerfile               # Frontend Docker image
-├── backend/Dockerfile       # Backend Docker image
-└── nginx.conf               # Nginx configuration
+├── frontend/                 # Frontend folder
+│   ├── src/                 # React source
+│   │   ├── components/      # React components
+│   │   ├── pages/           # Page components
+│   │   ├── api/             # API services
+│   │   └── types/           # TypeScript types
+│   ├── public/              # Static files
+│   ├── package.json         # Dependencies
+│   ├── Dockerfile           # Frontend Docker image
+│   └── nginx.conf           # Nginx configuration
+│
+├── backend/                  # Backend folder
+│   ├── src/main/java/       # Java source code
+│   │   └── com/nxtclass/    # Main package
+│   ├── pom.xml              # Maven dependencies
+│   └── Dockerfile           # Backend Docker image
+│
+└── docker-compose.yml        # Docker orchestration
 ```
 
 ## 🌐 Deployment
