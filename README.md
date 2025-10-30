@@ -8,10 +8,10 @@ A comprehensive digital platform for managing school operations including classr
 nxtclass/
 ├── frontend/          # React + TypeScript frontend (all UI code)
 ├── backend/           # Spring Boot backend (all API code)
-└── docker-compose.yml # Docker orchestration
+└── docker-compose.yml # Docker orchestration (3 services only)
 ```
 
-**Two separate folders - clean separation! ✅**
+**Services: MySQL + Backend + Frontend. No n8n, no extras. ✅**
 
 ---
 
