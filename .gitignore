@@ -1,3 +1,12 @@
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
 # Logs
 logs
 *.log
@@ -7,10 +16,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
+
+# Build outputs
+frontend/dist
+frontend/build
+backend/target
+backend/out
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +38,26 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# IDE
+*.iml
+.project
+.classpath
+.settings/
+
+# Database
+*.sql.backup
+data/
