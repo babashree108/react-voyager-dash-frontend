@@ -18,7 +18,7 @@ export interface StudentDetails {
 
 export const studentService = {
   saveStudent: async (data: StudentDetails): Promise<number> => {
-    return ApiService.getInstance().post('student-details/save', data);
+    return ApiService.getInstance().post('/student-details/save', data);
   },
   
   updateStudent: async (data: StudentDetails): Promise<number> => {

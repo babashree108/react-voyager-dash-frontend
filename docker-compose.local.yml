@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nxtclass-local:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: nxtclass-local
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    volumes:
+      # Optional: Persist MySQL data
+      - mysql-local-data:/var/lib/mysql
+      # Optional: Mount logs for debugging
+      - ./logs:/var/log
+
+volumes:
+  mysql-local-data:
+    driver: local
