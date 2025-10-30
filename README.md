@@ -6,62 +6,28 @@ A comprehensive digital platform for managing school operations including classr
 
 ```
 nxtclass/
-├── frontend/          # React + TypeScript frontend (all UI code)
-├── backend/           # Spring Boot backend (all API code)
-└── docker-compose.yml # Docker orchestration (3 services only)
+├── frontend/          # React + TypeScript frontend
+├── backend/           # Spring Boot backend
+└── docker-compose.yml # Docker orchestration (MySQL + Backend + Frontend)
 ```
-
-**Services: MySQL + Backend + Frontend. No n8n, no extras. ✅**
 
 ---
 
-## 🍎 Testing on Mac Right Now!
+## 🚀 Quick Start
 
-**You have Docker Desktop + VSCode? Test in 1 command:**
-
-```bash
-./START_TESTING.sh
-```
-
-**Or manually:**
+### Start with Docker (Recommended)
 
 ```bash
-# 1. Make sure Docker Desktop is running (whale icon in menu bar)
-
-# 2. In VSCode terminal (Ctrl + `):
-docker-compose up -d
-
-# 3. Wait 5-10 minutes (first time build)
-
-# 4. Open browser:
-open http://localhost
-
-# Done! ✅
-```
-
-**Guides:** [TEST_NOW.md](./TEST_NOW.md) | [MAC_TESTING_GUIDE.md](./MAC_TESTING_GUIDE.md) | [READY_FOR_TESTING.md](./READY_FOR_TESTING.md)
-
----
-
-## 🚀 Quick Start (5 Minutes)
-
-### Option 1: Docker (Recommended)
-
-```bash
-# 1. Clone the repository
+# Clone and start
 git clone <YOUR_REPO_URL>
 cd nxtclass
-
-# 2. Start with Docker Compose
 docker-compose up -d
 
-# 3. Wait 2-3 minutes for services to start
-
-# 4. Access the application
+# Open browser
 open http://localhost
 ```
 
-### Option 2: Local Development
+### Or Local Development
 
 **Frontend:**
 ```bash
@@ -78,45 +44,7 @@ mvn spring-boot:run
 # Access: http://localhost:8080
 ```
 
-**Access Points:**
-- Frontend: http://localhost (Docker) or http://localhost:5173 (Dev)
-- Backend API: http://localhost:8080/api
-- Database: localhost:3306 (Docker only)
-
-## 📖 Documentation
-
-### 🚀 Getting Started
-
-**Mac Users with Docker Desktop:**
-- 🍎 **[TEST_NOW.md](./TEST_NOW.md)** ⭐ **START HERE - Test in 30 seconds**
-- 📱 **[MAC_TESTING_GUIDE.md](./MAC_TESTING_GUIDE.md)** - Complete Mac guide with VSCode
-- ⚡ **[QUICK_TEST_MAC.md](./QUICK_TEST_MAC.md)** - 2-minute quick test
-- 📖 **[TESTING_ON_MAC.md](./TESTING_ON_MAC.md)** - Detailed testing scenarios
-
-**General Guides:**
-- **[START_HERE.md](./START_HERE.md)** - Complete guide from local to production
-- **[QUICKSTART.md](./QUICKSTART.md)** - Quick reference
-- **[LOCAL_TESTING.md](./LOCAL_TESTING.md)** - Local testing guide
-
-### 🌐 Deployment
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete Hostinger VPS deployment guide
-- **[CICD_SETUP.md](./CICD_SETUP.md)** - Setup automatic deployment on git push
-- **[TESTING_DEPLOYMENT_GUIDE.md](./TESTING_DEPLOYMENT_GUIDE.md)** - Full workflow reference
-
-### 🔀 Repository Structure
-- **[MONOREPO_STRUCTURE.md](./MONOREPO_STRUCTURE.md)** ⭐ Monorepo with independent frontend/backend deployments
-- **[SEPARATE_REPOS_QUICKSTART.md](./SEPARATE_REPOS_QUICKSTART.md)** - (Optional) Quick guide to split into separate repos
-- **[SEPARATE_REPOS.md](./SEPARATE_REPOS.md)** - (Optional) Complete separation guide
-
-### 📚 Reference
-- **[README_DEPLOYMENT.md](./README_DEPLOYMENT.md)** - Docker deployment overview
-- **[DEPLOYMENT_COMPLETE.md](./DEPLOYMENT_COMPLETE.md)** - Setup completion summary
-
-### ✅ Verification Reports
-- **[ALL_CHECKS_COMPLETE.md](./ALL_CHECKS_COMPLETE.md)** ⭐ Quick verification summary
-- **[COMPLETE_VERIFICATION_SUMMARY.md](./COMPLETE_VERIFICATION_SUMMARY.md)** - Full verification details
-- **[PATH_VERIFICATION.md](./PATH_VERIFICATION.md)** - Docker paths verification
-- **[DOCUMENTATION_REVIEW.md](./DOCUMENTATION_REVIEW.md)** - Documentation review
+---
 
 ## 🏗️ Architecture
 
@@ -124,172 +52,164 @@ mvn spring-boot:run
 
 **Frontend:**
 - React 18 + TypeScript
-- Vite for build tooling
-- Tailwind CSS + shadcn/ui components
-- React Router for navigation
-- Axios for API calls
+- Vite build tool
+- Tailwind CSS + shadcn/ui
+- React Router
+- Axios
 
 **Backend:**
 - Java 17 + Spring Boot 3.2
 - Spring Data JPA + Hibernate
-- MySQL 8.0 database
+- MySQL 8.0
 - JWT authentication
 - RESTful API
 
 **DevOps:**
 - Docker + Docker Compose
 - Nginx reverse proxy
-- n8n workflow automation (optional)
 
-### System Architecture
+### Services
 
 ```
-┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-│   Frontend   │──────▶│   Backend    │──────▶│   MySQL DB   │
-│ React + Vite │       │ Spring Boot  │       │   Database   │
-│  (Port 80)   │       │  (Port 8080) │       │  (Port 3306) │
-└──────────────┘       └──────────────┘       └──────────────┘
+Frontend (port 80)
+    ↓
+Backend (port 8080)
+    ↓
+MySQL (port 3306)
 ```
 
-## 🎯 Features Implemented
-
-### ✅ Core Features (Complete)
-- User authentication and authorization
-- Role-based access control (Admin, Teacher, Student)
-- Student management (CRUD operations)
-- Teacher management (CRUD operations)
-- Subject management
-- Course management with sections
-- Dashboard for all user roles
-- Responsive UI with modern design
-
-### ⚠️ In Progress
-- Virtual classroom (UI only)
-- Digital notebook (UI only)
-- Assignment system (UI only)
-- Analytics dashboard
-
-### 📋 Planned Features
-- Real-time video/audio (WebRTC)
-- Quiz system with 3-round structure
-- Age-based student admissions
-- Innovation hub for project ideas
-- Multi-language support
-
-See [Feature Progress Analysis](#) for detailed status.
-
-## 🛠️ Development Setup
-
-### Prerequisites
-- Node.js 20+ and npm
-- Java 17+
-- Maven 3.9+
-- MySQL 8.0+
-- Docker & Docker Compose (recommended)
-
-### Local Development (Without Docker)
-
-**Backend:**
-```bash
-cd backend
-mvn clean install
-mvn spring-boot:run
-```
-
-**Frontend:**
-```bash
-npm install
-npm run dev
-```
-
-### With Docker (Recommended)
-
-```bash
-# Build and start all services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop all services
-docker-compose down
-```
+---
 
 ## 📦 Project Structure
 
 ```
 nxtclass/
-├── frontend/                      # Frontend folder
-│   ├── src/                       # React source
-│   │   ├── api/                   # API service calls
-│   │   ├── components/            # React components
-│   │   ├── pages/                 # Page components
-│   │   ├── config/                # Configuration
-│   │   ├── hooks/                 # Custom hooks
-│   │   ├── lib/                   # Utilities
-│   │   └── types/                 # TypeScript types
-│   ├── public/                    # Static assets
-│   ├── package.json               # Dependencies
-│   ├── vite.config.ts             # Build config
-│   ├── Dockerfile                 # Frontend Docker
-│   ├── nginx.conf                 # Nginx config
-│   └── README.md                  # Frontend docs
+├── frontend/
+│   ├── src/
+│   │   ├── api/              # API services
+│   │   ├── components/       # React components
+│   │   ├── pages/            # Page components
+│   │   ├── config/           # Configuration
+│   │   ├── hooks/            # Custom hooks
+│   │   ├── lib/              # Utilities
+│   │   └── types/            # TypeScript types
+│   ├── public/               # Static assets
+│   ├── package.json          # Dependencies
+│   ├── Dockerfile            # Frontend Docker build
+│   └── nginx.conf            # Nginx configuration
 │
-├── backend/                       # Backend folder
-│   ├── src/main/java/             # Java source
+├── backend/
+│   ├── src/main/java/
 │   │   └── com/nxtclass/
-│   │       ├── controller/        # REST controllers
-│   │       ├── service/           # Business logic
-│   │       ├── repository/        # Data access
-│   │       ├── entity/            # JPA entities
-│   │       ├── dto/               # Data transfer objects
-│   │       └── config/            # Configuration
-│   ├── src/main/resources/        # Config files
-│   ├── pom.xml                    # Maven dependencies
-│   ├── Dockerfile                 # Backend Docker
-│   └── README.md                  # Backend docs
+│   │       ├── controller/   # REST controllers
+│   │       ├── service/      # Business logic
+│   │       ├── repository/   # Data access
+│   │       ├── entity/       # JPA entities
+│   │       ├── dto/          # DTOs
+│   │       └── config/       # Configuration
+│   ├── src/main/resources/   # Config files
+│   ├── pom.xml               # Maven dependencies
+│   └── Dockerfile            # Backend Docker build
 │
-├── .github/workflows/             # CI/CD pipelines
-│   ├── deploy-frontend.yml        # Frontend deployment
-│   └── deploy-backend.yml         # Backend deployment
+├── .github/workflows/        # CI/CD
+│   ├── deploy-frontend.yml   # Frontend deployment
+│   └── deploy-backend.yml    # Backend deployment
 │
-├── .vscode/                       # VSCode config
-│   ├── tasks.json                 # Quick tasks
-│   └── settings.json              # Editor settings
-│
-├── docker-compose.yml             # Docker orchestration
-└── README.md                      # This file
+└── docker-compose.yml        # Docker orchestration
 ```
+
+---
+
+## 🎯 Features
+
+### ✅ Implemented
+- User authentication & authorization
+- Role-based access (Admin, Teacher, Student)
+- Student management (CRUD)
+- Teacher management (CRUD)
+- Subject management
+- Course management
+- Responsive UI with modern design
+
+### ⚠️ UI Only (No Backend)
+- Virtual classroom
+- Digital notebook
+- Assignment system
+
+### 📋 Planned
+- Real-time video/audio (WebRTC)
+- Quiz system
+- Student admissions
+- Innovation hub
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+- Docker & Docker Compose (recommended)
+- OR: Node.js 20+, Java 17+, Maven 3.9+, MySQL 8.0+
+
+### Docker Commands
+
+```bash
+# Start all services
+docker-compose up -d
+
+# Check status (should show 3 services)
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+
+# Clean restart
+docker-compose down -v
+docker-compose up -d --build
+```
+
+### Access Points
+
+- **Frontend:** http://localhost
+- **Backend API:** http://localhost:8080/api
+- **Backend Health:** http://localhost:8080/actuator/health
+- **Database:** localhost:3306
+
+### Database Configuration
+
+```
+Database: nxtclass_db
+User: nxtclass_user
+Password: nxtclass_pass_2024
+```
+
+---
 
 ## 🌐 Deployment
 
-### Deploy to Hostinger VPS
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for VPS deployment instructions.
 
-1. **SSH into your VPS:**
-   ```bash
-   ssh root@your-vps-ip
-   ```
+### Quick Deploy to VPS
 
-2. **Install Docker:**
-   ```bash
-   curl -fsSL https://get.docker.com | sh
-   ```
+```bash
+# 1. SSH to VPS
+ssh root@your-vps-ip
 
-3. **Clone and configure:**
-   ```bash
-   git clone <repo> nxtclass && cd nxtclass
-   cp .env.example .env
-   nano .env  # Update with your values
-   ```
+# 2. Install Docker
+curl -fsSL https://get.docker.com | sh
 
-4. **Deploy:**
-   ```bash
-   ./deploy.sh
-   ```
+# 3. Clone and start
+git clone <repo> nxtclass
+cd nxtclass
+cp .env.example .env
+docker-compose up -d
+```
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete instructions.
+---
 
-## 🔧 Management Commands
+## 🔧 Management
 
 ```bash
 # Health check
@@ -301,65 +221,36 @@ docker-compose logs -f
 # Restart services
 docker-compose restart
 
-# Backup database
-docker-compose exec mysql mysqldump -u root -p nxtclass_db > backup.sql
-
 # Update application
 git pull
-docker-compose build
-docker-compose up -d
+docker-compose up -d --build
 ```
+
+---
 
 ## 🔒 Security
 
-- JWT-based authentication
+- JWT authentication
 - BCrypt password hashing
 - CORS configuration
 - Environment-based secrets
 - Non-root Docker containers
-- Security headers in Nginx
 
-## 📊 Current Implementation Status
+---
 
-**Overall Progress: ~25-30%** based on the complete design document
+## 📊 Progress Status
+
+**Overall: ~25-30% complete**
 
 | Module | Status | Progress |
 |--------|--------|----------|
-| Core Infrastructure | ✅ Complete | 90% |
+| Infrastructure | ✅ Complete | 90% |
 | User Management | ✅ Complete | 100% |
-| Student/Teacher Onboarding | ✅ Complete | 100% |
+| Student/Teacher | ✅ Complete | 100% |
 | Virtual Classroom | ⚠️ UI Only | 15% |
 | Digital Notebook | ⚠️ UI Only | 20% |
 | Quiz System | ❌ Not Started | 0% |
-| Innovation Hub | ❌ Not Started | 0% |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📞 Support
-
-- **Issues**: Create an issue on GitHub
-- **Documentation**: Check DEPLOYMENT.md and QUICKSTART.md
-- **Logs**: `docker-compose logs -f`
-
-## 📄 License
-
-This project is proprietary software for NXT Class educational platform.
-
-## 🎉 Quick Links
-
-- **Start Locally**: `./deploy.sh` → option 1
-- **Deploy to VPS**: [DEPLOYMENT.md](./DEPLOYMENT.md)
-- **Health Check**: `./health-check.sh`
-- **View Logs**: `docker-compose logs -f`
 
 ---
 
 **Built with ❤️ for modern education**
-
-For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
