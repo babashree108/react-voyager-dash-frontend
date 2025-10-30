@@ -34,9 +34,10 @@ open http://localhost
 - **[CICD_SETUP.md](./CICD_SETUP.md)** - Setup automatic deployment on git push
 - **[TESTING_DEPLOYMENT_GUIDE.md](./TESTING_DEPLOYMENT_GUIDE.md)** - Full workflow reference
 
-### 🔀 Repository Separation
-- **[SEPARATE_REPOS_QUICKSTART.md](./SEPARATE_REPOS_QUICKSTART.md)** ⭐ Quick guide to split frontend/backend
-- **[SEPARATE_REPOS.md](./SEPARATE_REPOS.md)** - Complete separation guide with independent CI/CD
+### 🔀 Repository Structure
+- **[MONOREPO_STRUCTURE.md](./MONOREPO_STRUCTURE.md)** ⭐ Monorepo with independent frontend/backend deployments
+- **[SEPARATE_REPOS_QUICKSTART.md](./SEPARATE_REPOS_QUICKSTART.md)** - (Optional) Quick guide to split into separate repos
+- **[SEPARATE_REPOS.md](./SEPARATE_REPOS.md)** - (Optional) Complete separation guide
 
 ### 📚 Reference
 - **[README_DEPLOYMENT.md](./README_DEPLOYMENT.md)** - Docker deployment overview

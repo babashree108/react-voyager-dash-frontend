@@ -5,14 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'vite.config.ts'
-      - 'tsconfig.json'
-      - 'Dockerfile'
-      - 'nginx.conf'
+      - 'frontend/**'
       - '.github/workflows/deploy-frontend.yml'
   workflow_dispatch:
 
@@ -31,11 +24,11 @@ jobs:
           script: |
             echo "🔄 Starting frontend deployment..."
             
-            # Navigate to frontend directory
-            cd /opt/nxtclass-frontend || exit 1
+            # Navigate to project directory
+            cd /opt/nxtclass || exit 1
             
             # Pull latest changes
-            echo "📥 Pulling latest frontend code..."
+            echo "📥 Pulling latest code..."
             git fetch origin main
             git reset --hard origin/main
             
@@ -43,7 +36,7 @@ jobs:
             echo "⏸️  Stopping frontend..."
             docker-compose stop frontend
             
-            # Build new image
+            # Build new frontend image
             echo "🏗️  Building frontend image..."
             docker-compose build frontend --no-cache
             

@@ -5,9 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'pom.xml'
-      - 'Dockerfile'
+      - 'backend/**'
       - '.github/workflows/deploy-backend.yml'
   workflow_dispatch:
 
@@ -26,11 +24,11 @@ jobs:
           script: |
             echo "🔄 Starting backend deployment..."
             
-            # Navigate to backend directory
-            cd /opt/nxtclass-backend || exit 1
+            # Navigate to project directory
+            cd /opt/nxtclass || exit 1
             
             # Pull latest changes
-            echo "📥 Pulling latest backend code..."
+            echo "📥 Pulling latest code..."
             git fetch origin main
             git reset --hard origin/main
             
@@ -38,7 +36,7 @@ jobs:
             echo "⏸️  Stopping backend..."
             docker-compose stop backend
             
-            # Build new image
+            # Build new backend image
             echo "🏗️  Building backend image..."
             docker-compose build backend --no-cache
             
