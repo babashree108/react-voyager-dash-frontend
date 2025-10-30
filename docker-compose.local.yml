@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.local
     container_name: nxtclass-local
     ports:
-      - "8081:80"
+      - "80:80"
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=nxtclass_db
