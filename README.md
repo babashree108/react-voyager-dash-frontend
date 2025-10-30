@@ -2,32 +2,101 @@
 
 A comprehensive digital platform for managing school operations including classroom management, student admissions, course management, and interactive learning tools.
 
+## 📁 Repository Structure
+
+```
+nxtclass/
+├── frontend/          # React + TypeScript frontend (all UI code)
+├── backend/           # Spring Boot backend (all API code)
+└── docker-compose.yml # Docker orchestration
+```
+
+**Two separate folders - clean separation! ✅**
+
+---
+
+## 🍎 Testing on Mac Right Now!
+
+**You have Docker Desktop + VSCode? Test in 1 command:**
+
+```bash
+./START_TESTING.sh
+```
+
+**Or manually:**
+
+```bash
+# 1. Make sure Docker Desktop is running (whale icon in menu bar)
+
+# 2. In VSCode terminal (Ctrl + `):
+docker-compose up -d
+
+# 3. Wait 5-10 minutes (first time build)
+
+# 4. Open browser:
+open http://localhost
+
+# Done! ✅
+```
+
+**Guides:** [TEST_NOW.md](./TEST_NOW.md) | [MAC_TESTING_GUIDE.md](./MAC_TESTING_GUIDE.md) | [READY_FOR_TESTING.md](./READY_FOR_TESTING.md)
+
+---
+
 ## 🚀 Quick Start (5 Minutes)
+
+### Option 1: Docker (Recommended)
 
 ```bash
 # 1. Clone the repository
 git clone <YOUR_REPO_URL>
 cd nxtclass
 
-# 2. Start with Docker (Recommended)
-./deploy.sh
-# Choose option 1 (Fresh deployment)
+# 2. Start with Docker Compose
+docker-compose up -d
 
-# 3. Access the application
+# 3. Wait 2-3 minutes for services to start
+
+# 4. Access the application
 open http://localhost
 ```
 
-**That's it!** Your application is now running with:
-- Frontend: http://localhost
-- Backend API: http://localhost:8080
-- Database: MySQL on port 3306
+### Option 2: Local Development
+
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+# Access: http://localhost:5173
+```
+
+**Backend:**
+```bash
+cd backend
+mvn spring-boot:run
+# Access: http://localhost:8080
+```
+
+**Access Points:**
+- Frontend: http://localhost (Docker) or http://localhost:5173 (Dev)
+- Backend API: http://localhost:8080/api
+- Database: localhost:3306 (Docker only)
 
 ## 📖 Documentation
 
 ### 🚀 Getting Started
-- **[START_HERE.md](./START_HERE.md)** ⭐ **START HERE** - Complete guide from local testing to production
-- **[QUICKSTART.md](./QUICKSTART.md)** - Get running in 5 minutes
-- **[LOCAL_TESTING.md](./LOCAL_TESTING.md)** - Test locally before deployment
+
+**Mac Users with Docker Desktop:**
+- 🍎 **[TEST_NOW.md](./TEST_NOW.md)** ⭐ **START HERE - Test in 30 seconds**
+- 📱 **[MAC_TESTING_GUIDE.md](./MAC_TESTING_GUIDE.md)** - Complete Mac guide with VSCode
+- ⚡ **[QUICK_TEST_MAC.md](./QUICK_TEST_MAC.md)** - 2-minute quick test
+- 📖 **[TESTING_ON_MAC.md](./TESTING_ON_MAC.md)** - Detailed testing scenarios
+
+**General Guides:**
+- **[START_HERE.md](./START_HERE.md)** - Complete guide from local to production
+- **[QUICKSTART.md](./QUICKSTART.md)** - Quick reference
+- **[LOCAL_TESTING.md](./LOCAL_TESTING.md)** - Local testing guide
 
 ### 🌐 Deployment
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete Hostinger VPS deployment guide
@@ -150,24 +219,46 @@ docker-compose down
 
 ```
 nxtclass/
-├── frontend/                 # Frontend folder
-│   ├── src/                 # React source
-│   │   ├── components/      # React components
-│   │   ├── pages/           # Page components
-│   │   ├── api/             # API services
-│   │   └── types/           # TypeScript types
-│   ├── public/              # Static files
-│   ├── package.json         # Dependencies
-│   ├── Dockerfile           # Frontend Docker image
-│   └── nginx.conf           # Nginx configuration
+├── frontend/                      # Frontend folder
+│   ├── src/                       # React source
+│   │   ├── api/                   # API service calls
+│   │   ├── components/            # React components
+│   │   ├── pages/                 # Page components
+│   │   ├── config/                # Configuration
+│   │   ├── hooks/                 # Custom hooks
+│   │   ├── lib/                   # Utilities
+│   │   └── types/                 # TypeScript types
+│   ├── public/                    # Static assets
+│   ├── package.json               # Dependencies
+│   ├── vite.config.ts             # Build config
+│   ├── Dockerfile                 # Frontend Docker
+│   ├── nginx.conf                 # Nginx config
+│   └── README.md                  # Frontend docs
 │
-├── backend/                  # Backend folder
-│   ├── src/main/java/       # Java source code
-│   │   └── com/nxtclass/    # Main package
-│   ├── pom.xml              # Maven dependencies
-│   └── Dockerfile           # Backend Docker image
+├── backend/                       # Backend folder
+│   ├── src/main/java/             # Java source
+│   │   └── com/nxtclass/
+│   │       ├── controller/        # REST controllers
+│   │       ├── service/           # Business logic
+│   │       ├── repository/        # Data access
+│   │       ├── entity/            # JPA entities
+│   │       ├── dto/               # Data transfer objects
+│   │       └── config/            # Configuration
+│   ├── src/main/resources/        # Config files
+│   ├── pom.xml                    # Maven dependencies
+│   ├── Dockerfile                 # Backend Docker
+│   └── README.md                  # Backend docs
 │
-└── docker-compose.yml        # Docker orchestration
+├── .github/workflows/             # CI/CD pipelines
+│   ├── deploy-frontend.yml        # Frontend deployment
+│   └── deploy-backend.yml         # Backend deployment
+│
+├── .vscode/                       # VSCode config
+│   ├── tasks.json                 # Quick tasks
+│   └── settings.json              # Editor settings
+│
+├── docker-compose.yml             # Docker orchestration
+└── README.md                      # This file
 ```
 
 ## 🌐 Deployment

@@ -1,0 +1,91 @@
+🍎 MAC TESTING - DO THIS NOW
+================================
+
+You're on Mac with Docker Desktop and VSCode.
+
+STEP 1: Check Docker Desktop
+-----------------------------
+- Open Docker Desktop from Applications
+- Wait for whale icon in menu bar to be steady (not animated)
+
+STEP 2: Open Terminal in VSCode
+--------------------------------
+- In VSCode, press: Ctrl + `
+- Or: View → Terminal
+
+STEP 3: Start Services
+----------------------
+Run this command:
+
+    docker-compose up -d
+
+Wait 5-10 minutes (first time only, grab coffee!)
+
+STEP 4: Check Status
+--------------------
+Run:
+
+    docker-compose ps
+
+Should show 3 services "Up":
+- nxtclass-frontend
+- nxtclass-backend
+- nxtclass-mysql
+
+STEP 5: Open Browser
+--------------------
+Run:
+
+    open http://localhost
+
+Should show NXT Class login page
+
+STEP 6: Verify Everything Works
+--------------------------------
+Run these tests:
+
+    curl http://localhost/health
+    curl http://localhost:8080/actuator/health
+    curl http://localhost/api/student-details/list
+
+All should return successful responses.
+
+TROUBLESHOOTING
+===============
+
+Port 80 in use?
+    sudo apachectl stop
+
+Services not starting?
+    docker-compose logs -f
+
+Need to restart?
+    docker-compose restart
+
+Stop everything:
+    docker-compose down
+
+QUICK REFERENCE
+===============
+
+Start:     docker-compose up -d
+Stop:      docker-compose down  
+Status:    docker-compose ps
+Logs:      docker-compose logs -f
+Restart:   docker-compose restart
+
+VSCODE TASKS
+============
+
+Press: Cmd + Shift + P
+Type: Tasks: Run Task
+Select: 🚀 Docker: Start All
+
+DONE!
+=====
+
+Frontend: http://localhost
+Backend:  http://localhost:8080
+API:      http://localhost/api
+
+For detailed guide, see: TEST_NOW.md or MAC_TESTING_GUIDE.md
