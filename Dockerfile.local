@@ -60,5 +60,5 @@ RUN chmod +x /start.sh
 # Expose only port 80
 EXPOSE 80
 
-# Start everything
-CMD ["/start.sh"]
+# Start everything with bash (not direct script execution)
+CMD ["/bin/bash", "/start.sh"]
