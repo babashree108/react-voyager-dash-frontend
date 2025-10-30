@@ -16,6 +16,7 @@ export default function Sidebar({ userRole, userName }: SidebarProps) {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 

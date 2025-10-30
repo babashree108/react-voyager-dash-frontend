@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosHeaders, AxiosInstance } from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -13,6 +13,32 @@ export class ApiService {
         'Content-Type': 'application/json',
       },
     });
+
+    this.api.interceptors.request.use((config) => {
+      if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const headers = AxiosHeaders.from(config.headers ?? {});
+          headers.set('Authorization', `Bearer ${token}`);
+          config.headers = headers;
+        }
+      }
+      return config;
+    });
+
+    this.api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401 && typeof window !== 'undefined') {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          if (window.location.pathname !== '/login') {
+            window.location.href = '/login';
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
   }
 
   public static getInstance(): ApiService {

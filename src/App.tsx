@@ -22,6 +22,7 @@ import TeacherForm from "./pages/TeacherForm";
 import SubjectForm from "./pages/SubjectForm";
 import Course from "./pages/Course";
 import CourseForm from "./pages/CourseForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -34,28 +35,174 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<UserManagement />} />
-          <Route path="/classroom" element={<VirtualClassroom />} />
-          <Route path="/assignments" element={<Assignments />} />
-          <Route path="/announcements" element={<Announcements />} />
-          <Route path="/notebook" element={<DigitalNotebook />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/students" element={<Students />} />
-          <Route path="/students/add" element={<StudentForm />} />
-          <Route path="/students/edit/:id" element={<StudentForm />} />
-          
-          <Route path="/teachers" element={<Teachers />} />
-          <Route path="/teachers/add" element={<TeacherForm />} />
-          <Route path="/teachers/edit/:id" element={<TeacherForm />} />
-          <Route path="/subject" element={<Subject />} />
-          <Route path="/subject/add" element={<SubjectForm />} />
-          <Route path="/subject/edit/:id" element={<SubjectForm />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/course/add" element={<CourseForm />} />
-          <Route path="/course/edit/:id" element={<CourseForm />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <UserManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/classroom"
+            element={
+              <ProtectedRoute>
+                <VirtualClassroom />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assignments"
+            element={
+              <ProtectedRoute>
+                <Assignments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/announcements"
+            element={
+              <ProtectedRoute>
+                <Announcements />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/notebook"
+            element={
+              <ProtectedRoute>
+                <DigitalNotebook />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+                <Analytics />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/help"
+            element={
+              <ProtectedRoute>
+                <Help />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/students"
+            element={
+              <ProtectedRoute>
+                <Students />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/students/add"
+            element={
+              <ProtectedRoute>
+                <StudentForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/students/edit/:id"
+            element={
+              <ProtectedRoute>
+                <StudentForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teachers"
+            element={
+              <ProtectedRoute>
+                <Teachers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teachers/add"
+            element={
+              <ProtectedRoute>
+                <TeacherForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teachers/edit/:id"
+            element={
+              <ProtectedRoute>
+                <TeacherForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/subject"
+            element={
+              <ProtectedRoute>
+                <Subject />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/subject/add"
+            element={
+              <ProtectedRoute>
+                <SubjectForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/subject/edit/:id"
+            element={
+              <ProtectedRoute>
+                <SubjectForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/course"
+            element={
+              <ProtectedRoute>
+                <Course />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/course/add"
+            element={
+              <ProtectedRoute>
+                <CourseForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/course/edit/:id"
+            element={
+              <ProtectedRoute>
+                <CourseForm />
+              </ProtectedRoute>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

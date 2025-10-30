@@ -2,12 +2,17 @@ import { User, ClassSession, Assignment, Announcement, Stat } from '@/types';
 import { DataService } from '@/api/services/data.service';
 
 const dataService = DataService.getInstance();
+const USE_MOCK_ONLY = import.meta.env.VITE_USE_MOCK_DATA === 'true';
 
 // Function to fetch data with fallback to mock data
 const fetchWithFallback = async <T>(
   fetchFn: () => Promise<T>,
   mockData: T
 ): Promise<T> => {
+  if (USE_MOCK_ONLY) {
+    return mockData;
+  }
+
   try {
     const data = await fetchFn();
     return data;
