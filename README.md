@@ -15,7 +15,18 @@ nxtclass/
 
 ## 🚀 Quick Start
 
-### Start with Docker (Recommended)
+### Local Testing (One Container) ⭐ EASIEST
+
+```bash
+# One command - starts everything in a single container
+./test-local.sh
+
+# Access at: http://localhost
+```
+
+**That's it! One container, one URL, everything included.**
+
+### Production Setup (Three Containers)
 
 ```bash
 # Clone and start
@@ -23,8 +34,7 @@ git clone <YOUR_REPO_URL>
 cd nxtclass
 docker-compose up -d
 
-# Open browser
-open http://localhost
+# Access at: http://localhost
 ```
 
 ### Or Local Development
