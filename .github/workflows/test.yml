@@ -1,0 +1,78 @@
+name: Test Build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install dependencies
+        run: npm ci --legacy-peer-deps
+      
+      - name: 🏗️ Build frontend
+        run: npm run build
+        env:
+          VITE_API_URL: http://localhost/api
+      
+      - name: ✅ Frontend build successful
+        run: echo "Frontend build completed successfully"
+
+  test-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      
+      - name: 🏗️ Build backend
+        run: |
+          cd backend
+          mvn clean package -DskipTests
+      
+      - name: ✅ Backend build successful
+        run: echo "Backend build completed successfully"
+
+  test-docker:
+    runs-on: ubuntu-latest
+    needs: [test-frontend, test-backend]
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🐳 Test Docker builds
+        run: |
+          echo "Testing frontend Docker build..."
+          docker build -t nxtclass-frontend:test \
+            --build-arg VITE_API_URL=http://localhost/api \
+            .
+          
+          echo "Testing backend Docker build..."
+          docker build -t nxtclass-backend:test \
+            ./backend
+      
+      - name: ✅ Docker builds successful
+        run: echo "All Docker builds completed successfully"

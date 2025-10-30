@@ -24,9 +24,19 @@ open http://localhost
 
 ## 📖 Documentation
 
+### 🚀 Getting Started
+- **[START_HERE.md](./START_HERE.md)** ⭐ **START HERE** - Complete guide from local testing to production
 - **[QUICKSTART.md](./QUICKSTART.md)** - Get running in 5 minutes
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide for Hostinger VPS
+- **[LOCAL_TESTING.md](./LOCAL_TESTING.md)** - Test locally before deployment
+
+### 🌐 Deployment
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete Hostinger VPS deployment guide
+- **[CICD_SETUP.md](./CICD_SETUP.md)** - Setup automatic deployment on git push
+- **[TESTING_DEPLOYMENT_GUIDE.md](./TESTING_DEPLOYMENT_GUIDE.md)** - Full workflow reference
+
+### 📚 Reference
 - **[README_DEPLOYMENT.md](./README_DEPLOYMENT.md)** - Docker deployment overview
+- **[DEPLOYMENT_COMPLETE.md](./DEPLOYMENT_COMPLETE.md)** - Setup completion summary
 
 ## 🏗️ Architecture
 
