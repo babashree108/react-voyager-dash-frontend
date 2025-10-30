@@ -1,20 +1,79 @@
-import { useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { mockUsers } from '@/data/mockData';
+import { authService } from '@/api/services/auth.service';
+import { useToast } from '@/hooks/use-toast';
+import { User, UserRole } from '@/types';
+
+const DEFAULT_EMAIL = 'admin@nxtclass.com';
+const DEFAULT_PASSWORD = 'Admin@123';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [role, setRole] = useState<'orgadmin' | 'teacher' | 'student'>('orgadmin');
+  const { toast } = useToast();
+  const [email, setEmail] = useState(DEFAULT_EMAIL);
+  const [password, setPassword] = useState(DEFAULT_PASSWORD);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    const user = mockUsers.find(u => u.role === role);
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    if (token && storedUser) {
       navigate('/dashboard');
+    }
+  }, [navigate]);
+
+  const handleLogin = async (event: FormEvent) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await authService.login({ email, password });
+
+      if (!response?.token || !response?.user) {
+        throw new Error('Invalid authentication response. Please try again.');
+      }
+
+      const normalizedRole = (response.user.role ?? '').toLowerCase();
+      const normalizedStatus = (response.user.status ?? '').toLowerCase();
+
+      if (!['orgadmin', 'teacher', 'student'].includes(normalizedRole)) {
+        throw new Error('Unsupported role returned for this user.');
+      }
+
+      const statusValue = normalizedStatus === 'inactive' ? 'inactive' : 'active';
+
+      const normalizedUser: User = {
+        id: String(response.user.id),
+        name: response.user.name,
+        email: response.user.email,
+        role: normalizedRole as UserRole,
+        status: statusValue,
+        organization: response.user.organization ?? undefined,
+        avatarUrl: response.user.avatarUrl ?? undefined,
+      };
+
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(normalizedUser));
+
+      toast({
+        title: 'Welcome back!',
+        description: `${normalizedUser.name} signed in successfully.`
+      });
+
+      navigate('/dashboard');
+    } catch (error) {
+      const fallbackMessage = 'Unable to sign in. Please verify your credentials and try again.';
+      const description = (error as any)?.response?.data ?? (error as Error)?.message ?? fallbackMessage;
+      toast({
+        variant: 'destructive',
+        title: 'Sign in failed',
+        description: typeof description === 'string' ? description : fallbackMessage
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,77 +117,44 @@ export default function Login() {
           <h2 className="text-[32px] font-bold mb-2 text-[#111827]">Sign In</h2>
           <p className="text-[#6b7280] mb-8">Access your organization's learning platform</p>
 
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <Button 
-              variant="outline" 
-              className="h-[48px] gap-2 text-[14px] border-[#d1d5db] hover:bg-[#f9fafb]"
-            >
-              <span className="text-base">🔵</span> Google
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-[48px] gap-2 text-[14px] border-[#d1d5db] hover:bg-[#f9fafb]"
-            >
-              <span className="text-base">🔷</span> Microsoft
-            </Button>
-          </div>
-
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-[#e5e7eb]" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-[#9ca3af]">OR</span>
-            </div>
-          </div>
-
-          <div className="space-y-5">
-            <div className="space-y-2">
-              <Label className="text-[14px] font-medium text-[#374151]">User Role</Label>
-              <Select value={role} onValueChange={(value: any) => setRole(value)}>
-                <SelectTrigger className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg">
-                  <SelectValue placeholder="Select your role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="orgadmin">Organization Admin</SelectItem>
-                  <SelectItem value="teacher">Teacher</SelectItem>
-                  <SelectItem value="student">Student</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
+          <form className="space-y-5" onSubmit={handleLogin}>
             <div className="space-y-2">
               <Label className="text-[14px] font-medium text-[#374151]">Email Address</Label>
-              <Input 
-                type="email" 
-                placeholder="you@organization.com" 
-                defaultValue="admin@school.edu"
+              <Input
+                type="email"
+                placeholder="you@organization.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg"
+                required
               />
             </div>
 
             <div className="space-y-2">
               <Label className="text-[14px] font-medium text-[#374151]">Password</Label>
-              <Input 
-                type="password" 
-                placeholder="••••••••" 
-                defaultValue="password"
+              <Input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 className="h-[48px] text-[15px] border-[#d1d5db] rounded-lg"
+                required
               />
             </div>
 
-            <Button 
+            <Button
+              type="submit"
+              disabled={isLoading}
               className="w-full h-[56px] text-[16px] font-semibold rounded-lg"
               style={{ background: '#4f46e5' }}
-              onClick={handleLogin}
             >
-              Sign In
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </Button>
 
             <div className="bg-[#fef3c7] text-[#92400e] p-4 rounded-lg text-[13px]">
-              🔒 Two-factor authentication enabled
+              🔒 Default admin credentials: <strong>{DEFAULT_EMAIL}</strong> / <strong>{DEFAULT_PASSWORD}</strong>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
