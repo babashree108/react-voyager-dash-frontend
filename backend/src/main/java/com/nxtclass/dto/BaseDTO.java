@@ -25,7 +25,7 @@ public class BaseDTO {
 
     private String address2;
 
-    private Long pincode;
+    private String pincode;
 
     private String state;
 
