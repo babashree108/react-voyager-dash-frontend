@@ -17,7 +17,9 @@ public class BaseDTO {
 
     private String phoneNo;
 
-    private String grade;
+    private Long gradeIdentifier;
+    
+    private Long sectionIdentifier;
 
     private String lecture;
 
@@ -25,7 +27,7 @@ public class BaseDTO {
 
     private String address2;
 
-    private Long pincode;
+    private String pincode;
 
     private String state;
 

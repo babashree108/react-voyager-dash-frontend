@@ -17,8 +17,8 @@ public class Section extends BaseDomain {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "grade_id")
     @JsonBackReference
-    private Course course;
+    private Grade grade;
 
 }
