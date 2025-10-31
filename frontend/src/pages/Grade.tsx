@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from '@/components/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Plus, MoreVertical } from 'lucide-react';
 import {
@@ -10,21 +10,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { subjectService } from '@/api/services/subejct.service';
+} from '@/components/ui/dropdown-menu';
+import { gradeService } from '@/api/services/grade.service';
 import { useToast } from '@/hooks/use-toast';
 
-export default function Subject() {
+export default function Grade() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const [subjects, setSubjects] = useState<any[]>([]);
+  const [grades, setGrades] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,21 +34,21 @@ export default function Subject() {
   });
 
   useEffect(() => {
-    const fetchSubjects = async () => {
+    const fetchGrades = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await subjectService.list();
-        setSubjects(data);
-      } catch (error) {
-        console.error('Error fetching subjects:', error);
-        setError('Failed to load subjects. Please try again later.');
+        const data = await gradeService.list();
+        setGrades(data);
+      } catch (err) {
+        console.error('Error fetching grades:', err);
+        setError('Failed to load grades. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchSubjects();
+    fetchGrades();
   }, []);
 
   if (!user || user.role !== 'orgadmin') {
@@ -56,27 +56,18 @@ export default function Subject() {
     return null;
   }
 
-  const handleAction = async (action: string, subjectId: number) => {
+  const handleAction = async (action: string, gradeId: number) => {
     switch (action) {
       case 'edit':
-        navigate(`/subject/edit/${subjectId}`);
+        navigate(`/grade/edit/${gradeId}`);
         break;
       case 'delete':
         try {
-          await subjectService.delete(subjectId);
-          toast({
-            title: "Success",
-            description: "Subject deleted successfully",
-          });
-          // ✅ Update local state to reflect deletion
-          const updatedSubjects = subjects.filter((t: any) => t.identifier !== subjectId);
-          setSubjects(updatedSubjects);
-        } catch (error) {
-          toast({
-            title: "Error",
-            description: "Failed to delete subject",
-            variant: "destructive",
-          });
+          await gradeService.delete(gradeId);
+          toast({ title: 'Success', description: 'Grade deleted successfully' });
+          setGrades(prev => prev.filter(g => g.identifier !== gradeId));
+        } catch (err) {
+          toast({ title: 'Error', description: 'Failed to delete grade', variant: 'destructive' });
         }
         break;
       default:
@@ -89,17 +80,12 @@ export default function Subject() {
       <div className="p-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Subjects</h1>
-            <p className="text-muted-foreground">
-              Manage your subject records and information
-            </p>
+            <h1 className="text-3xl font-bold mb-2">Grades</h1>
+            <p className="text-muted-foreground">Manage your grade records and information</p>
           </div>
-          <Button 
-            onClick={() => navigate('/subject/add')} 
-            className="gap-2"
-          >
+          <Button onClick={() => navigate('/grade/add')} className="gap-2">
             <Plus className="w-4 h-4" />
-            Add Subject
+            Add Grade
           </Button>
         </div>
 
@@ -107,7 +93,8 @@ export default function Subject() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Subject</TableHead>
+                <TableHead>Grade</TableHead>
+                <TableHead>Description</TableHead>
                 <TableHead className="w-[80px] text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -117,7 +104,7 @@ export default function Subject() {
                   <TableCell colSpan={4} className="text-center py-8">
                     <div className="flex items-center justify-center space-x-2">
                       <div className="animate-spin h-6 w-6 border-4 border-primary border-t-transparent rounded-full"></div>
-                      <span>Loading subjects...</span>
+                      <span>Loading grades...</span>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -127,37 +114,30 @@ export default function Subject() {
                     {error}
                   </TableCell>
                 </TableRow>
-              ) : subjects.length === 0 ? (
+              ) : grades.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8">
-                    No subjects found. Click "Add Subject" to create one.
+                    No grades found. Click "Add Grade" to create one.
                   </TableCell>
                 </TableRow>
               ) : (
-                subjects.map((subject: any) => (
-                  <TableRow key={subject.identifier}>
-                    <TableCell>{subject.subject}</TableCell>
+                grades.map((grade: any) => (
+                  <TableRow key={grade.identifier}>
+                    <TableCell>{grade.grade}</TableCell>
+                    <TableCell>{grade.description}</TableCell>
                     <TableCell className="text-center">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            className="h-8 w-8 p-0"
-                          >
+                          <Button variant="ghost" className="h-8 w-8 p-0">
                             <MoreVertical className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            onClick={() => handleAction('edit', subject.identifier)}
-                          >
-                            Edit Subject
+                          <DropdownMenuItem onClick={() => handleAction('edit', grade.identifier)}>
+                            Edit Grade
                           </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleAction('delete', subject.identifier)}
-                            className="text-red-600"
-                          >
-                            Delete Subject
+                          <DropdownMenuItem onClick={() => handleAction('delete', grade.identifier)} className="text-red-600">
+                            Delete Grade
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
