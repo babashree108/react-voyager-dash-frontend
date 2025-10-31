@@ -269,7 +269,7 @@ export default function StudentForm() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lecture">Lecture</Label>
+                      <Label htmlFor="lecture">Subjects</Label>
                       <Input
                         id="lecture"
                         name="lecture"
