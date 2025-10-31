@@ -14,6 +14,7 @@ export interface StudentDetails {
   state: string;
   country: string;
   adharNo: string;
+  gender?: string;
 }
 
 export const studentService = {

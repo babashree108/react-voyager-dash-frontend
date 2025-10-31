@@ -12,6 +12,7 @@ export interface TeacherDetails {
   state: string;
   country: string;
   adharNo: string;
+  gender?: string;
 }
 
 export const teacherService = {

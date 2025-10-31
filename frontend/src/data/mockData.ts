@@ -170,11 +170,12 @@ export const mockAnnouncements: Announcement[] = [
   }
 ];
 
+// Default mock stats used only when backend calls fail
 export const orgAdminStats: Stat[] = [
-  { label: 'Total Users', value: 245, change: '+12%', trend: 'up' },
-  { label: 'Active Classes', value: 32, change: '+5%', trend: 'up' },
-  { label: 'Teachers', value: 18, change: '+2', trend: 'up' },
-  { label: 'Students', value: 227, change: '+10%', trend: 'up' }
+  { label: 'Total Users', value: 0, change: undefined, trend: 'up' },
+  { label: 'Teachers', value: 0, change: undefined, trend: 'up' },
+  { label: 'Students', value: 0, change: undefined, trend: 'up' },
+  { label: 'Courses', value: 0, change: undefined, trend: 'up' }
 ];
 
 export const teacherStats: Stat[] = [
@@ -212,10 +213,46 @@ export const getAnnouncements = () => fetchWithFallback(
   mockAnnouncements
 );
 
-export const getOrgAdminStats = () => fetchWithFallback(
-  () => dataService.queryStats<Stat>('orgadmin'),
-  orgAdminStats
+// Generic count getter with fallback
+const getCount = (endpoint: string, fallback: number) => fetchWithFallback(
+  async () => {
+    const response = await dataService.getById<number>(endpoint, 'count');
+    return response;
+  },
+  fallback
 );
+
+export const getStudentCount = () => getCount('student-details', mockUsers.filter(u => u.role === 'student').length);
+export const getTeacherCount = () => getCount('teacher-details', mockUsers.filter(u => u.role === 'teacher').length);
+export const getCourseCount = () => getCount('course', 0);
+export const getSubjectCount = () => getCount('subject', 0);
+
+// Build org admin stats dynamically from backend counts
+export const getOrgAdminStats = async (): Promise<Stat[]> => {
+  try {
+    const [students, teachers, courses /*, subjects*/] = await Promise.all([
+      getStudentCount(),
+      getTeacherCount(),
+      getCourseCount(),
+      // getSubjectCount(), // Uncomment if you want subjects instead of courses
+    ]);
+
+    const totalUsers = (Number(students) || 0) + (Number(teachers) || 0);
+
+    const stats: Stat[] = [
+      { label: 'Total Users', value: totalUsers },
+      { label: 'Teachers', value: teachers },
+      { label: 'Students', value: students },
+      { label: 'Courses', value: courses },
+      // Or swap with subjects: { label: 'Subjects', value: subjects }
+    ];
+    return stats;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Falling back to mock org admin stats due to error:', err);
+    return orgAdminStats;
+  }
+};
 
 export const getTeacherStats = async () => {
   const studentCount = await getStudentCount();
@@ -227,25 +264,14 @@ export const getTeacherStats = async () => {
       value: studentCount
     };
   }
-  return fetchWithFallback(
-    () => dataService.queryStats<Stat>('teacher'),
-    updatedTeacherStats
-  );
+  // For now, return the updated mock teacher stats; replace with backend when available
+  return updatedTeacherStats;
 };
 
-export const getStudentStats = () => fetchWithFallback(
-  () => dataService.queryStats<Stat>('student'),
-  studentStats
-);
+export const getStudentStats = () => Promise.resolve(studentStats);
 
 // Function to get student count from the backend
-export const getStudentCount = () => fetchWithFallback(
-  async () => {
-    const response = await dataService.getById<number>('student-details', 'count');
-    return response;
-  },
-  mockUsers.filter(user => user.role === 'student').length
-);
+// getStudentCount is defined above via getCount
 
 // In mockData.ts
 

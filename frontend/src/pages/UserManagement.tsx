@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,13 +6,24 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { User } from '@/types';
-import { mockUsers } from '@/data/mockData';
 import { Search, UserPlus, Edit, Trash2 } from 'lucide-react';
+import { studentService } from '@/api/services/student.service';
+import { teacherService } from '@/api/services/teacher.service';
 
 export default function UserManagement() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  
+  // Must be declared unconditionally (Rule of Hooks). Compute even before auth guard.
+  const filteredUsers = useMemo(() => (
+    (users || []).filter(u => 
+      (u.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (u.email || '').toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  ), [users, searchTerm]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -28,12 +39,68 @@ export default function UserManagement() {
     setUser(parsedUser);
   }, [navigate]);
 
-  if (!user) return null;
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        setLoading(true);
+        const [students, teachers] = await Promise.all([
+          studentService.getStudentList() as Promise<any[]>,
+          teacherService.getTeacherList() as Promise<any[]>,
+        ]);
 
-  const filteredUsers = mockUsers.filter(u => 
-    u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+        const normalizeName = (obj: any) => ({
+          fName: obj.fName ?? obj.fname ?? obj.firstName ?? obj.first_name ?? '',
+          lName: obj.lName ?? obj.lname ?? obj.lastName ?? obj.last_name ?? '',
+        });
+
+        const mappedStudents: User[] = (Array.isArray(students) ? students : []).map((s: any) => {
+          const { fName, lName } = normalizeName(s);
+          const safeId = s.identifier ?? s.id ?? `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+          return {
+            id: String(safeId),
+            name: `${fName} ${lName}`.trim(),
+            email: s.email || '',
+            role: 'student',
+            status: 'active',
+          } as User;
+        });
+
+        const mappedTeachers: User[] = (Array.isArray(teachers) ? teachers : []).map((t: any) => {
+          const { fName, lName } = normalizeName(t);
+          const safeId = t.identifier ?? t.id ?? `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+          return {
+            id: String(safeId),
+            name: `${fName} ${lName}`.trim(),
+            email: t.email || '',
+            role: 'teacher',
+            status: 'active',
+          } as User;
+        });
+
+        // Optionally include the current admin user at the top
+        const adminUser: User[] = user ? [{
+          id: 'admin',
+          name: user.name,
+          email: (user as any).email || 'admin@school.com',
+          role: 'orgadmin',
+          status: 'active',
+        }] : [];
+
+        setUsers([...adminUser, ...mappedTeachers, ...mappedStudents]);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('Failed to load users from backend, showing empty list.', e);
+        setUsers(user ? [{ id: 'admin', name: user.name, email: 'admin@school.com', role: 'orgadmin', status: 'active' }] : []);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (user) {
+      loadUsers();
+    }
+  }, [user]);
+
+  if (!user) return null;
 
   const getRoleBadgeClass = (role: string) => {
     switch (role) {
@@ -61,7 +128,7 @@ export default function UserManagement() {
         <Card className="shadow-card">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>All Users ({filteredUsers.length})</CardTitle>
+              <CardTitle>All Users ({loading ? '...' : filteredUsers.length})</CardTitle>
               <div className="relative w-64">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input 

@@ -5,6 +5,7 @@ import com.nxtclass.dto.StudentDetailsDTO;
 import com.nxtclass.entity.StudentDetails;
 import com.nxtclass.repository.StudentDetailsRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class StudentDetailsAPI {
 
     private final StudentDetailsRepo repo;
@@ -26,6 +28,9 @@ public class StudentDetailsAPI {
     }
 
     public Long save (StudentDetailsDTO dto) {
+        log.info("=== StudentDetailsAPI.save() received ===");
+        log.info("fName: {}, lName: {}, email: {}", dto.getFName(), dto.getLName(), dto.getEmail());
+        
         StudentDetails entity = (dto.getIdentifier() != null)
                 ? repo.findById(dto.getIdentifier()).orElse(new StudentDetails())
                 : new StudentDetails();

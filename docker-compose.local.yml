@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nxtclass-local:
     build:
@@ -8,6 +6,7 @@ services:
     container_name: nxtclass-local
     ports:
       - "80:80"
+      - "127.0.0.1:3306:3306"
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=nxtclass_db

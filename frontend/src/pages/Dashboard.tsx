@@ -16,7 +16,11 @@ export default function Dashboard() {
       navigate('/login');
       return;
     }
-    setUser(JSON.parse(storedUser));
+    const parsed = JSON.parse(storedUser);
+    // Debug: log parsed user to ensure role/name are present
+    // eslint-disable-next-line no-console
+    console.debug('Dashboard - user from storage:', parsed);
+    setUser(parsed);
   }, [navigate]);
 
   if (!user) return null;

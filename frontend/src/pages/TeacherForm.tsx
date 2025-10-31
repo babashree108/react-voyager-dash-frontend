@@ -26,7 +26,8 @@ export default function TeacherForm() {
     pincode: '',
     state: '',
     country: '',
-    adharNo: ''
+    adharNo: '',
+    gender: 'Not Specified'
   });
 
   const [user] = useState(() => {
@@ -40,8 +41,11 @@ export default function TeacherForm() {
       
       try {
         setLoading(true);
-        const data = await teacherService.getTeacherDetails(parseInt(id));
-        setFormData(data);
+        const data = await teacherService.getTeacherDetails(parseInt(id)) as TeacherDetails;
+        setFormData({
+          ...data,
+          gender: data.gender ?? 'Not Specified',
+        });
       } catch (error) {
         console.error('Error fetching teacher details:', error);
         toast({
@@ -171,6 +175,21 @@ export default function TeacherForm() {
                         onChange={handleChange}
                         required
                       />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="gender">Gender</Label>
+                      <select
+                        id="gender"
+                        name="gender"
+                        value={formData.gender || 'Not Specified'}
+                        onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        <option value="Not Specified">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                   </div>
                 </div>

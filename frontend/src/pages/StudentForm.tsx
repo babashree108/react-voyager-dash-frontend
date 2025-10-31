@@ -29,6 +29,7 @@ export default function StudentForm() {
     state: string;
     country: string;
     adharNo: string;
+    gender: string;
   }
 
   const [formData, setFormData] = useState<StudentFormData>({
@@ -44,7 +45,8 @@ export default function StudentForm() {
     pincode: '',
     state: '',
     country: '',
-    adharNo: ''
+    adharNo: '',
+    gender: 'Not Specified'
   });
 
   const [user] = useState(() => {
@@ -58,10 +60,11 @@ export default function StudentForm() {
       
       try {
         setLoading(true);
-        const data = await studentService.getStudentDetails(parseInt(id));
+        const data = await studentService.getStudentDetails(parseInt(id)) as any;
         setFormData({
           ...data,
-          identifier: data.identifier || null
+          identifier: data.identifier || null,
+          gender: data.gender ?? 'Not Specified',
         });
       } catch (error) {
         console.error('Error fetching student details:', error);
@@ -192,6 +195,21 @@ export default function StudentForm() {
                         onChange={handleChange}
                         required
                       />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="gender">Gender</Label>
+                      <select
+                        id="gender"
+                        name="gender"
+                        value={formData.gender}
+                        onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        <option value="Not Specified">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="grade">Grade</Label>

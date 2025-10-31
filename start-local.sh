@@ -8,7 +8,7 @@ echo "=============================================="
 echo "📦 Starting MySQL..."
 mkdir -p /var/run/mysqld
 chown mysql:mysql /var/run/mysqld
-mysqld --user=mysql --daemonize
+mysqld --user=mysql --bind-address=0.0.0.0 --daemonize
 
 # Wait for MySQL to be ready
 echo "⏳ Waiting for MySQL to be ready..."
@@ -24,8 +24,11 @@ done
 # Create database and user
 echo "🗄️  Setting up database..."
 mysql -e "CREATE DATABASE IF NOT EXISTS nxtclass_db;" || true
+# create user for localhost (local processes in container) and for remote hosts (%), so mapped ports work
 mysql -e "CREATE USER IF NOT EXISTS 'nxtclass_user'@'localhost' IDENTIFIED BY 'nxtclass_pass_2024';" || true
+mysql -e "CREATE USER IF NOT EXISTS 'nxtclass_user'@'%' IDENTIFIED BY 'nxtclass_pass_2024';" || true
 mysql -e "GRANT ALL PRIVILEGES ON nxtclass_db.* TO 'nxtclass_user'@'localhost';" || true
+mysql -e "GRANT ALL PRIVILEGES ON nxtclass_db.* TO 'nxtclass_user'@'%';" || true
 mysql -e "FLUSH PRIVILEGES;" || true
 
 # Import initial SQL if exists
@@ -40,6 +43,15 @@ echo ""
 # Start Backend
 echo "🚀 Starting Backend..."
 cd /app/backend
+
+# Export datasource environment variables so Spring Boot in this single-container
+# setup connects to the local MySQL instance (mysqld started above). This overrides
+# the JDBC URL in application.properties which is intended for multi-container
+# (where the DB host is 'mysql').
+export SPRING_DATASOURCE_URL="jdbc:mysql://localhost:3306/nxtclass_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+export SPRING_DATASOURCE_USERNAME="nxtclass_user"
+export SPRING_DATASOURCE_PASSWORD="nxtclass_pass_2024"
+
 nohup java -jar target/*.jar > /var/log/backend.log 2>&1 &
 BACKEND_PID=$!
 echo "   Backend PID: $BACKEND_PID"

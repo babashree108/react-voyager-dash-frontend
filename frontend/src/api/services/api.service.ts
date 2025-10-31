@@ -1,6 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+// Provide a sensible default so the built frontend will proxy to the backend via nginx
+// when VITE_API_URL isn't set at build time. Many local setups use "/api" as the
+// proxy path (nginx forwards /api/* to the Spring Boot app), so default to that.
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export class ApiService {
   private static instance: ApiService;

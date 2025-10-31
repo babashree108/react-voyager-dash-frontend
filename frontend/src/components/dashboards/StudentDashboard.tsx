@@ -19,6 +19,10 @@ export default function StudentDashboard({ userName }: StudentDashboardProps) {
   useEffect(() => {
     const fetchStats = async () => {
       const statsData = await getStudentStats();
+      // Debug: log the type/shape we received to catch non-array responses
+      // (avoids silent failures that cause `.map` errors)
+      // eslint-disable-next-line no-console
+      console.debug('StudentDashboard - fetched stats:', statsData);
       setStats(statsData);
     };
     fetchStats();
@@ -44,7 +48,7 @@ export default function StudentDashboard({ userName }: StudentDashboardProps) {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat, index) => (
+        {Array.isArray(stats) && stats.map((stat, index) => (
           <StatCard key={index} stat={stat} />
         ))}
       </div>
