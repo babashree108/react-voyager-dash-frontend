@@ -8,6 +8,7 @@ services:
     container_name: nxtclass-local
     ports:
       - "80:80"
+      - "3306:3306"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/health"]
