@@ -1,0 +1,136 @@
+🔍 BLANK DASHBOARD - DIAGNOSTIC STEPS
+
+YOUR ISSUE:
+===========
+✅ Container is running
+✅ Can access http://localhost
+✅ Login works
+❌ Dashboard page is blank after login
+
+
+POSSIBLE CAUSES:
+================
+1. Backend API not running inside container
+2. Frontend can't connect to API
+3. Database not initialized
+4. Services not started properly
+
+
+RUN THESE COMMANDS ON YOUR MAC:
+================================
+
+STEP 1: Check services inside container
+----------------------------------------
+docker exec nxtclass-local supervisorctl status
+
+Should show:
+  mysql      RUNNING
+  backend    RUNNING
+  nginx      RUNNING
+
+If NOT all RUNNING → Services failed to start
+
+
+STEP 2: Check backend logs
+---------------------------
+docker exec nxtclass-local tail -100 /var/log/backend-stdout.log
+
+Look for:
+  ✅ "Started BackendApplication" → Backend is running
+  ❌ Java errors → Backend crashed
+
+
+STEP 3: Check backend errors
+-----------------------------
+docker exec nxtclass-local tail -50 /var/log/backend-stderr.log
+
+Look for:
+  - Database connection errors
+  - Port binding errors
+  - Java exceptions
+
+
+STEP 4: Test API directly
+--------------------------
+curl http://localhost/api/student-details/list
+
+Should return:
+  [] or JSON data
+
+If returns nothing or error → API not working
+
+
+STEP 5: Check browser console
+------------------------------
+1. Open http://localhost
+2. Press F12 (Developer Tools)
+3. Go to Console tab
+4. Look for errors:
+   - Network errors (API calls failing)
+   - JavaScript errors
+   - 404 errors
+
+
+STEP 6: Check Network tab
+--------------------------
+1. F12 → Network tab
+2. Refresh page
+3. Look at API calls:
+   - Are they being made?
+   - What's the status code?
+   - 200 = OK
+   - 404 = Not found
+   - 500 = Server error
+
+
+QUICK FIXES:
+============
+
+FIX 1: Restart services inside container
+-----------------------------------------
+docker exec nxtclass-local supervisorctl restart all
+
+
+FIX 2: Check MySQL is running
+------------------------------
+docker exec nxtclass-local mysql -u nxtclass_user -pnxtclass_pass_2024 -e "SHOW DATABASES;"
+
+Should show: nxtclass_db
+
+
+FIX 3: Restart entire container
+--------------------------------
+docker-compose -f docker-compose.local.yml restart
+
+
+FIX 4: View all logs
+--------------------
+docker-compose -f docker-compose.local.yml logs -f
+
+Watch for errors as services start
+
+
+COMMON ISSUES:
+==============
+
+Issue 1: Backend not started
+Solution: docker exec nxtclass-local supervisorctl restart backend
+
+Issue 2: MySQL not ready
+Solution: docker exec nxtclass-local supervisorctl restart mysql
+          docker exec nxtclass-local supervisorctl restart backend
+
+Issue 3: Port 8080 conflict inside container
+Solution: docker-compose -f docker-compose.local.yml down
+          docker-compose -f docker-compose.local.yml up -d
+
+
+PASTE THIS OUTPUT:
+==================
+
+Run this and paste the output:
+
+docker exec nxtclass-local supervisorctl status
+docker exec nxtclass-local curl -s http://localhost:8080/actuator/health
+
+This will tell me what's wrong!

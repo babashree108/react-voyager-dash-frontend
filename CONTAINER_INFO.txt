@@ -1,0 +1,114 @@
+🔍 WHAT'S IN THE LOCAL TESTING CONTAINER
+
+BASE IMAGE:
+===========
+Ubuntu 22.04 (Linux)
+
+SOFTWARE INSTALLED:
+===================
+1. mysql-server      → MySQL 8.0 database
+2. openjdk-17-jdk    → Java 17 for Spring Boot
+3. maven             → Build tool for backend
+4. nodejs            → JavaScript runtime
+5. npm               → Package manager for frontend
+6. nginx             → Web server
+7. supervisor        → Process manager (runs all services)
+8. curl, wget        → Tools
+
+BUILD PROCESS:
+==============
+1. Copy backend code      → /app/backend/
+2. Build with Maven       → Creates /app/backend/target/*.jar
+3. Copy frontend code     → /app/frontend/
+4. Build with npm         → Creates /app/frontend/dist/
+5. Deploy to Nginx        → Copies dist/ to /var/www/html/
+
+RUNNING SERVICES:
+=================
+✅ MySQL      (port 3306 - internal only)
+✅ Backend    (port 8080 - internal only)
+✅ Nginx      (port 80 - exposed to host)
+
+EXPOSED PORTS:
+==============
+Only port 80 → You access everything via http://localhost
+
+PROCESS MANAGER:
+================
+Supervisor manages all 3 services inside the container:
+- Starts MySQL first
+- Then starts Backend (waits for MySQL)
+- Then starts Nginx (serves frontend + proxies API)
+
+HOW IT WORKS:
+=============
+
+┌──────────────────────────────────────────┐
+│     YOUR DOCKER CONTAINER                │
+│                                          │
+│  You access → Port 80 (Nginx)           │
+│                  ↓                       │
+│              ┌───┴────┐                  │
+│              │        │                  │
+│         Frontend   Backend               │
+│         (HTML/JS)  (Port 8080)          │
+│                      ↓                   │
+│                  MySQL                   │
+│                (Port 3306)               │
+│                                          │
+└──────────────────────────────────────────┘
+           ↑
+    http://localhost
+
+
+WHERE TO CHECK:
+===============
+
+1. START THE CONTAINER:
+   ./test-local.sh
+
+2. CHECK IT'S RUNNING:
+   docker ps
+
+   You should see:
+   CONTAINER ID   IMAGE           PORTS
+   xxxxx          nxtclass-local  0.0.0.0:80->80/tcp
+
+3. CHECK FROM BROWSER:
+   open http://localhost
+   
+   Should show your React app!
+
+4. CHECK API:
+   curl http://localhost/api/student-details/list
+   
+   Should return JSON
+
+5. ENTER CONTAINER (optional):
+   docker exec -it nxtclass-local bash
+   
+   Inside container:
+   - supervisorctl status     (shows all services)
+   - ls /app/backend/target/  (shows backend JAR)
+   - ls /var/www/html/        (shows frontend files)
+   - mysql -u nxtclass_user -pnxtclass_pass_2024
+
+
+LOGS:
+=====
+From outside:
+  docker-compose -f docker-compose.local.yml logs -f
+
+From inside:
+  docker exec -it nxtclass-local tail -f /var/log/backend-stdout.log
+
+
+SUMMARY:
+========
+✅ ONE container with Ubuntu + MySQL + Java + Node + Nginx
+✅ Builds your backend (Maven) and frontend (npm)
+✅ Runs all 3 services with Supervisor
+✅ Exposes ONLY port 80
+✅ Access everything at http://localhost
+
+Simple. Clean. One container.

@@ -1,0 +1,90 @@
+🔍 HOW TO CHECK CONTAINER STATUS
+
+CURRENT STATUS:
+===============
+
+Check if container is running:
+
+    docker ps
+
+Should show something like:
+    CONTAINER ID   IMAGE           PORTS                NAMES
+    xxxxx          nxtclass-local  0.0.0.0:80->80/tcp  nxtclass-local
+
+If you see nothing, container is NOT running.
+
+
+WHY CONTAINER NOT RUNNING:
+==========================
+
+The build FAILED because of Node.js version issue.
+
+When Docker build fails:
+- No image is created
+- No container can run
+- You see "failed to solve" error
+
+
+WHAT TO DO NOW:
+===============
+
+1. I FIXED the Dockerfile (now installs Node.js 20)
+
+2. Clean rebuild:
+   ./rebuild-local.sh
+
+   This will:
+   - Clean old failed builds
+   - Build fresh with Node.js 20
+   - Start the container
+   - Take 5-10 minutes
+
+
+MANUAL STEPS:
+=============
+
+If script doesn't work, do manually:
+
+1. Clean up:
+   docker-compose -f docker-compose.local.yml down
+   docker rmi nxtclass-local 2>/dev/null
+   docker builder prune -f
+
+2. Rebuild:
+   docker-compose -f docker-compose.local.yml build --no-cache
+
+3. Start:
+   docker-compose -f docker-compose.local.yml up -d
+
+4. Check:
+   docker ps
+
+
+VERIFY CONTAINER IS RUNNING:
+=============================
+
+After rebuild, check:
+
+    docker ps | grep nxtclass-local
+
+Should show ONE container with:
+- PORT: 0.0.0.0:80->80/tcp
+- STATUS: Up X seconds/minutes
+
+Then access: http://localhost
+
+
+LOGS:
+=====
+
+If container starts but has issues:
+
+    docker-compose -f docker-compose.local.yml logs -f
+
+
+TL;DR - RUN THIS:
+=================
+
+    ./rebuild-local.sh
+
+Wait 5-10 minutes, then check http://localhost

@@ -1,0 +1,68 @@
+✅ STOP ccbp-ide, START nxtclass-local
+
+WHAT YOU WANT:
+==============
+❌ Stop ccbp-ide container
+✅ Use port 80 for nxtclass-local
+✅ Access at http://localhost
+
+
+HOW TO DO IT:
+=============
+
+Run this ONE command:
+
+    ./start-nxtclass.sh
+
+
+WHAT IT DOES:
+=============
+1. Stops ccbp-ide container (frees port 80)
+2. Builds nxtclass-local with Node.js 20
+3. Starts nxtclass-local on port 80
+4. Opens http://localhost
+
+
+AFTER RUNNING:
+==============
+
+Your docker ps will show ONLY:
+  nxtclass-local  (port 80)
+
+ccbp-ide will be stopped (not running)
+
+
+TO RESTART ccbp-ide LATER:
+==========================
+
+If you need ccbp-ide again:
+
+    docker start ccbp-ide
+
+Then stop nxtclass first:
+
+    docker-compose -f docker-compose.local.yml down
+
+
+QUICK COMMANDS:
+===============
+
+Start nxtclass (stops ccbp-ide):
+    ./start-nxtclass.sh
+
+Stop nxtclass:
+    docker-compose -f docker-compose.local.yml down
+
+Restart ccbp-ide:
+    docker start ccbp-ide
+
+
+NOW RUN:
+========
+
+    ./start-nxtclass.sh
+
+Wait 5-10 minutes
+Access: http://localhost
+
+Done! ✅

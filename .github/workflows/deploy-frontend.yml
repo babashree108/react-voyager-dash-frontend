@@ -1,0 +1,63 @@
+name: Deploy Frontend to VPS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy-frontend.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🚀 Deploy Frontend to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            echo "🔄 Starting frontend deployment..."
+            
+            # Navigate to project directory
+            cd /opt/nxtclass || exit 1
+            
+            # Pull latest changes
+            echo "📥 Pulling latest code..."
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Stop frontend service
+            echo "⏸️  Stopping frontend..."
+            docker-compose stop frontend
+            
+            # Build new frontend image
+            echo "🏗️  Building frontend image..."
+            docker-compose build frontend --no-cache
+            
+            # Start frontend service
+            echo "▶️  Starting frontend..."
+            docker-compose up -d frontend
+            
+            # Wait for service to be ready
+            echo "⏳ Waiting for frontend to start..."
+            sleep 15
+            
+            # Check health
+            echo "🏥 Checking frontend health..."
+            curl -f http://localhost/health || echo "Warning: Health check failed"
+            
+            # Cleanup
+            echo "🧹 Cleaning up old images..."
+            docker image prune -f
+            
+            echo "✅ Frontend deployment complete!"
+            
+            # Show status
+            echo "📊 Frontend status:"
+            docker-compose ps frontend

@@ -1,0 +1,64 @@
+# All-in-One Container for Local Testing
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install all dependencies
+RUN apt-get update && apt-get install -y \
+    mysql-server \
+    openjdk-17-jdk \
+    maven \
+    nginx \
+    curl \
+    wget \
+    supervisor \
+    ca-certificates \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js 20.x (required for Vite)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /app
+
+# Copy backend
+COPY backend/ /app/backend/
+
+# Copy frontend
+COPY frontend/ /app/frontend/
+
+# Build backend
+WORKDIR /app/backend
+RUN mvn clean package -DskipTests
+
+# Build frontend
+WORKDIR /app/frontend
+RUN npm install && npm run build
+
+# Copy frontend build to nginx
+RUN rm -rf /var/www/html/* && \
+    cp -r /app/frontend/dist/* /var/www/html/
+
+# Configure Nginx
+COPY nginx-local.conf /etc/nginx/sites-available/default
+
+# Configure MySQL
+RUN mkdir -p /var/run/mysqld && \
+    chown -R mysql:mysql /var/run/mysqld && \
+    chown -R mysql:mysql /var/lib/mysql
+
+# Create supervisor config
+COPY supervisord-local.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Create startup script
+COPY start-local.sh /start.sh
+RUN chmod +x /start.sh
+
+# Expose only port 80
+EXPOSE 80
+
+# Start everything with bash (not direct script execution)
+CMD ["/bin/bash", "/start.sh"]
