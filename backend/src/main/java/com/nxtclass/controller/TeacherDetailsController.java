@@ -1,7 +1,7 @@
 package com.nxtclass.controller;
 
 import com.nxtclass.dto.TeacherDetailsDTO;
-import com.nxtclass.service.impl.TeacherDetailsAPI;
+import com.nxtclass.service.TeacherDetailsAPI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

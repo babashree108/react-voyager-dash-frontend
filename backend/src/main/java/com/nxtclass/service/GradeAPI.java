@@ -1,11 +1,11 @@
 package com.nxtclass.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nxtclass.dto.CourseDTO;
+import com.nxtclass.dto.GradeDTO;
 import com.nxtclass.dto.SectionDTO;
-import com.nxtclass.entity.Course;
+import com.nxtclass.entity.Grade;
 import com.nxtclass.entity.Section;
-import com.nxtclass.repository.CourseRepo;
+import com.nxtclass.repository.GradeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,29 +15,31 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CourseAPI {
+public class GradeAPI {
 
-    private final CourseRepo repo;
+    private final GradeRepo repo;
 
     private final ObjectMapper objectMapper;
 
-    public List<CourseDTO> list() {
-        List<Course> entities = repo.findAll();
+    public List<GradeDTO> list() {
+        List<Grade> entities = repo.findAll();
         return entities.stream()
-                .map(entity -> objectMapper.convertValue(entity, CourseDTO.class))
+                .map(entity -> {
+                    GradeDTO dto = objectMapper.convertValue(entity, GradeDTO.class);
+                    dto.setGrade(entity.getGrade());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
-    public Long save (CourseDTO dto) {
-        Course entity = (dto.getIdentifier() != null)
-                ? repo.findById(dto.getIdentifier()).orElse(new Course())
-                : new Course();
-        entity.setCourse(dto.getCourse());
+    public Long save (GradeDTO dto) {
+        Grade entity = (dto.getIdentifier() != null)
+                ? repo.findById(dto.getIdentifier()).orElse(new Grade())
+                : new Grade();
+        entity.setGrade(dto.getGrade());
         entity.setDescription(dto.getDescription());
 
-            // sync sections: update existing, add new, remove missing (orphanRemoval=true handles deletes)
             if (dto.getSections() != null) {
-                // build new list based on DTOs
                 List<Section> newList = new ArrayList<>();
                 for (SectionDTO scDto : dto.getSections()) {
                     Section sc = null;
@@ -49,10 +51,9 @@ public class CourseAPI {
                     }
                     if (sc == null) sc = new Section();
                     sc.setName(scDto.getName());
-                    sc.setCourse(entity);
+                    sc.setGrade(entity);
                     newList.add(sc);
                 }
-                // replace sections on entity
                 entity.getSections().clear();
                 entity.getSections().addAll(newList);
         }
@@ -60,15 +61,17 @@ public class CourseAPI {
         return repo.save(entity).getIdentifier();
     }
 
-    public CourseDTO details (Long identifier) {
-        Course entity = repo.findById(identifier)
-                .orElseThrow(() -> new RuntimeException("Course not found with ID: " + identifier));
-        return objectMapper.convertValue(entity, CourseDTO.class);
+    public GradeDTO details (Long identifier) {
+    Grade entity = repo.findById(identifier)
+        .orElseThrow(() -> new RuntimeException("Grade not found with ID: " + identifier));
+    GradeDTO dto = objectMapper.convertValue(entity, GradeDTO.class);
+    dto.setGrade(entity.getGrade());
+    return dto;
     }
 
     public String delete(Long identifier) {
         if (!repo.existsById(identifier)) {
-            throw new RuntimeException("Course not found with ID: " + identifier);
+            throw new RuntimeException("Grade not found with ID: " + identifier);
         }
         repo.deleteById(identifier);
         return "success";

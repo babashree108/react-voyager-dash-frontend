@@ -6,7 +6,8 @@ export interface StudentDetails {
   lName: string;
   email: string;
   phoneNo: string;
-  grade: string;
+  gradeIdentifier?: number | null;
+  sectionIdentifier?: number | null;
   lecture: string;
   address1: string;
   address2?: string;

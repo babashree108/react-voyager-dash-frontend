@@ -4,7 +4,7 @@ import com.nxtclass.dto.StatResponse;
 import com.nxtclass.entity.AssignmentStatus;
 import com.nxtclass.entity.UserRole;
 import com.nxtclass.repository.AssignmentRepository;
-import com.nxtclass.repository.CourseRepo;
+import com.nxtclass.repository.GradeRepo;
 import com.nxtclass.repository.StudentDetailsRepo;
 import com.nxtclass.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +21,18 @@ import java.util.Locale;
 public class StatsController {
     private final UserRepository userRepository;
     private final StudentDetailsRepo studentDetailsRepo;
-    private final CourseRepo courseRepo;
+    private final GradeRepo gradeRepo;
     private final AssignmentRepository assignmentRepository;
 
     public StatsController(
             UserRepository userRepository,
             StudentDetailsRepo studentDetailsRepo,
-            CourseRepo courseRepo,
+            GradeRepo gradeRepo,
             AssignmentRepository assignmentRepository
     ) {
         this.userRepository = userRepository;
         this.studentDetailsRepo = studentDetailsRepo;
-        this.courseRepo = courseRepo;
+        this.gradeRepo = gradeRepo;
         this.assignmentRepository = assignmentRepository;
     }
 
@@ -53,18 +53,18 @@ public class StatsController {
         long totalUsers = userRepository.count();
         long teacherCount = userRepository.countByRole(UserRole.TEACHER);
         long studentCount = userRepository.countByRole(UserRole.STUDENT);
-        long courseCount = courseRepo.count();
+        long gradeCount = gradeRepo.count();
 
         return List.of(
                 new StatResponse("Total Users", totalUsers, null, "up"),
-                new StatResponse("Active Courses", courseCount, null, "up"),
+                new StatResponse("Active grades", gradeCount, null, "up"),
                 new StatResponse("Teachers", teacherCount, null, "up"),
                 new StatResponse("Students", studentCount, null, "up")
         );
     }
 
     private List<StatResponse> buildTeacherStats() {
-        long myClasses = courseRepo.count();
+        long myClasses = gradeRepo.count();
         long totalStudents = studentDetailsRepo.count();
         long totalAssignments = assignmentRepository.count();
         long pendingAssignments = assignmentRepository.countByStatus(AssignmentStatus.PENDING);
@@ -78,7 +78,7 @@ public class StatsController {
     }
 
     private List<StatResponse> buildStudentStats() {
-        long enrolledClasses = courseRepo.count();
+        long enrolledClasses = gradeRepo.count();
         long assignmentsDue = assignmentRepository.countByStatus(AssignmentStatus.PENDING);
 
         return List.of(

@@ -42,7 +42,7 @@ export const navigationConfig: Record<UserRole, NavSection[]> = {
         { href: '/students', label: 'Students', icon: Users },
         { href: '/teachers', label: 'Teachers', icon: Users },
          { href: '/subject', label: 'Subject Enroll', icon: Users },
-         { href: '/course', label: 'Courses', icon: BookOpen },
+         { href: '/grade', label: 'Grades', icon: BookOpen },
         { href: '/classroom', label: 'Classrooms', icon: Video },
         { href: '/assignments', label: 'Scheduling', icon: Calendar },
       ]

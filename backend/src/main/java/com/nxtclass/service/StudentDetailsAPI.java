@@ -33,7 +33,8 @@ public class StudentDetailsAPI {
         entity.setLName(dto.getLName());
         entity.setEmail(dto.getEmail());
         entity.setPhoneNo(dto.getPhoneNo());
-        entity.setGrade(dto.getGrade());
+        entity.setGradeIdentifier(dto.getGradeIdentifier());
+        entity.setSectionIdentifier(dto.getSectionIdentifier());
         entity.setLecture(dto.getLecture());
         entity.setAddress1(dto.getAddress1());
         entity.setAddress2(dto.getAddress2());

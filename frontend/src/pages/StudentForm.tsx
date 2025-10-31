@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { studentService } from '@/api/services/student.service';
+import { gradeService, GradeDetails, SectionDetails } from '@/api/services/grade.service';
 
 export default function StudentForm() {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ export default function StudentForm() {
     lName: string;
     email: string;
     phoneNo: string;
-    grade: string;
+    gradeIdentifier?: number | null;
+    sectionIdentifier?: number | null;
     lecture: string;
     address1: string;
     address2?: string;
@@ -37,7 +39,8 @@ export default function StudentForm() {
     lName: '',
     email: '',
     phoneNo: '',
-    grade: '',
+    gradeIdentifier: null,
+    sectionIdentifier: null,
     lecture: '',
     address1: '',
     address2: '',
@@ -46,6 +49,9 @@ export default function StudentForm() {
     country: '',
     adharNo: ''
   });
+
+  const [grades, setGrades] = useState<GradeDetails[]>([]);
+  const [sections, setSections] = useState<SectionDetails[]>([]);
 
   const [user] = useState(() => {
     const storedUser = localStorage.getItem('user');
@@ -61,8 +67,22 @@ export default function StudentForm() {
         const data = await studentService.getStudentDetails(parseInt(id));
         setFormData({
           ...data,
-          identifier: data.identifier || null
+          identifier: data.identifier || null,
+          gradeIdentifier: (data as any).gradeIdentifier ?? null,
+          sectionIdentifier: (data as any).sectionIdentifier ?? null
         });
+        // if gradeIdentifier present, preload sections
+        const cid = (data as any).gradeIdentifier;
+        if (cid) {
+          try {
+            const all = await gradeService.list();
+            setGrades(all || []);
+            const sel = all.find(c => c.identifier === cid);
+            setSections(sel?.sections || []);
+          } catch (e) {
+            console.warn('Failed to preload grades for student', e);
+          }
+        }
       } catch (error) {
         console.error('Error fetching student details:', error);
         toast({
@@ -76,6 +96,17 @@ export default function StudentForm() {
       }
     };
 
+    // always load grade list for selects
+    const loadGrades = async () => {
+      try {
+        const all = await gradeService.list();
+        setGrades(all || []);
+      } catch (e) {
+        console.error('Failed to load grades', e);
+      }
+    };
+
+    loadGrades();
     fetchStudentDetails();
   }, [id, isEditing, navigate, toast]);
 
@@ -90,6 +121,19 @@ export default function StudentForm() {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleGradeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const cid = e.target.value ? Number(e.target.value) : null;
+    // map grade selection into gradeIdentifier
+    setFormData(prev => ({ ...prev, gradeIdentifier: cid, sectionIdentifier: null }));
+    const selected = grades.find(c => c.identifier === cid);
+    setSections(selected?.sections || []);
+  };
+
+  const handleSectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const sid = e.target.value ? Number(e.target.value) : null;
+    setFormData(prev => ({ ...prev, sectionIdentifier: sid }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -195,14 +239,34 @@ export default function StudentForm() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="grade">Grade</Label>
-                      <Input
+                      <select
                         id="grade"
                         name="grade"
-                        placeholder="Enter grade"
-                        value={formData.grade}
-                        onChange={handleChange}
+                        className="w-full p-2 border rounded"
+                        value={formData.gradeIdentifier ?? ''}
+                        onChange={handleGradeChange}
                         required
-                      />
+                      >
+                        <option value="">-- Select grade --</option>
+                        {grades.map(c => (
+                          <option key={c.identifier} value={c.identifier}>{c.grade}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="section">Section</Label>
+                      <select
+                        id="section"
+                        name="section"
+                        className="w-full p-2 border rounded"
+                        value={formData.sectionIdentifier ?? ''}
+                        onChange={handleSectionChange}
+                      >
+                        <option value="">-- No section / Select --</option>
+                        {sections.map(s => (
+                          <option key={s.identifier} value={s.identifier}>{s.name}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lecture">Lecture</Label>

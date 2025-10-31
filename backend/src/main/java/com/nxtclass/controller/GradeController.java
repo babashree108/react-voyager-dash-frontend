@@ -1,48 +1,48 @@
 package com.nxtclass.controller;
 
-import com.nxtclass.dto.CourseDTO;
-import com.nxtclass.service.CourseAPI;
+import com.nxtclass.dto.GradeDTO;
+import com.nxtclass.service.GradeAPI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/course")
-public class CourseController {
-    private final CourseAPI courseAPI;
+@RequestMapping("/api/grade")
+public class GradeController {
+    private final GradeAPI gradeAPI;
 
-    public CourseController(CourseAPI courseAPI) {
-        this.courseAPI = courseAPI;
+    public GradeController(GradeAPI gradeAPI) {
+        this.gradeAPI = gradeAPI;
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<CourseDTO>> list() {
-        List<CourseDTO> course = courseAPI.list();
-        return ResponseEntity.ok(course);
+    public ResponseEntity<List<GradeDTO>> list() {
+        List<GradeDTO> grade = gradeAPI.list();
+        return ResponseEntity.ok(grade);
     }
     @GetMapping("count")
     public ResponseEntity<Long> count() {
-        return ResponseEntity.ok( courseAPI.list().stream().count());
+        return ResponseEntity.ok( gradeAPI.list().stream().count());
     }
 
 
     @PostMapping("save")
-    public ResponseEntity<Long> save (@RequestBody CourseDTO dto){
-        return ResponseEntity.ok(courseAPI.save(dto));
+    public ResponseEntity<Long> save (@RequestBody GradeDTO dto){
+        return ResponseEntity.ok(gradeAPI.save(dto));
     }
 
     @PutMapping("update")
-    public ResponseEntity<?> update(@RequestBody CourseDTO dto) {
+    public ResponseEntity<?> update(@RequestBody GradeDTO dto) {
         return (dto.getIdentifier() == null)
                 ? ResponseEntity.badRequest().body("Identifier is required for update.")
-                : ResponseEntity.ok(courseAPI.save(dto));
+                : ResponseEntity.ok(gradeAPI.save(dto));
     }
 
     @GetMapping("/{identifier}")
     public ResponseEntity<?> getDetails(@PathVariable Long identifier) {
         try {
-            CourseDTO dto = courseAPI.details(identifier);
+            GradeDTO dto = gradeAPI.details(identifier);
             return ResponseEntity.ok(dto);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class CourseController {
     @DeleteMapping("/{identifier}")
     public ResponseEntity<String> delete(@PathVariable Long identifier) {
         try {
-            String result = courseAPI.delete(identifier);
+            String result = gradeAPI.delete(identifier);
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

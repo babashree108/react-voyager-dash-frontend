@@ -16,16 +16,16 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Course extends BaseDomain{
+public class Grade extends BaseDomain{
 
-    private String course;
+    private String grade;
 
     @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Section> sections = new ArrayList<>();
 
 }

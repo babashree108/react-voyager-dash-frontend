@@ -22,8 +22,11 @@ public class StudentDetails extends BaseDomain{
         @Column(name = "phone_no")
         private String phoneNo;
 
-        @Column(name = "grade")
-        private String grade;
+    @Column(name = "grade_identifier")
+    private Long gradeIdentifier;
+
+    @Column(name = "section_identifier")
+    private Long sectionIdentifier;
 
         @Column(name = "lecture")
         private String lecture;

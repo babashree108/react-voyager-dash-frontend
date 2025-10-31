@@ -20,8 +20,8 @@ import Teachers from "./pages/Teachers";
 import Subject from "./pages/Subject";
 import TeacherForm from "./pages/TeacherForm";
 import SubjectForm from "./pages/SubjectForm";
-import Course from "./pages/Course";
-import CourseForm from "./pages/CourseForm";
+import Grade from "./pages/Grade";
+import GradeForm from "./pages/GradeForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -180,26 +180,26 @@ const App = () => (
             }
           />
           <Route
-            path="/course"
+            path="/grade"
             element={
               <ProtectedRoute>
-                <Course />
+                <Grade />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/course/add"
+            path="/grade/add"
             element={
               <ProtectedRoute>
-                <CourseForm />
+                <GradeForm />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/course/edit/:id"
+            path="/grade/edit/:id"
             element={
               <ProtectedRoute>
-                <CourseForm />
+                <GradeForm />
               </ProtectedRoute>
             }
           />

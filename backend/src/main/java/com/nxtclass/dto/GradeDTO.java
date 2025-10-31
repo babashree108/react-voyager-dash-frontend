@@ -6,9 +6,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CourseDTO extends BaseDTO{
+public class GradeDTO extends BaseDTO{
 
-    private String course;
+    private String grade;
     private String description;
     private List<SectionDTO> sections;
 
