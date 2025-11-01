@@ -4,47 +4,27 @@ echo "========================================"
 echo "🚀 Starting NXT Class Local Container"
 echo "========================================"
 
+# Ensure MySQL listens on all interfaces for host access (DBeaver)
+if [ -f "/etc/mysql/mysql.conf.d/mysqld.cnf" ]; then
+    echo "🔧 Configuring MySQL to bind on 0.0.0.0 for external access..."
+    sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf || true
+    # Also handle newer MySQLX config if present
+    sed -i 's/^mysqlx-bind-address\s*=.*/mysqlx-bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf || true
+fi
+
 # Initialize MySQL data directory if needed
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "📊 Initializing MySQL database..."
     mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql
 fi
 
-# Start MySQL temporarily to create database and user
-echo "🔧 Starting MySQL for initialization..."
-mysqld_safe --skip-networking &
-MYSQL_PID=$!
+# Ensure supervisor log directory exists
+mkdir -p /var/log/supervisor
 
-# Wait for MySQL to start
-echo "⏳ Waiting for MySQL to be ready..."
-for i in {1..30}; do
-    if mysqladmin ping &>/dev/null; then
-        echo "✅ MySQL is ready!"
-        break
-    fi
-    echo -n "."
-    sleep 1
-done
-
-# Create database and user
-echo "🔨 Creating database and user..."
-mysql -u root <<-EOSQL
-    CREATE DATABASE IF NOT EXISTS nxtClass108;
-    CREATE USER IF NOT EXISTS 'nxtclass_user'@'localhost' IDENTIFIED BY 'nxtclass_pass_2024';
-    CREATE USER IF NOT EXISTS 'nxtclass_user'@'%' IDENTIFIED BY 'nxtclass_pass_2024';
-    GRANT ALL PRIVILEGES ON nxtClass108.* TO 'nxtclass_user'@'localhost';
-    GRANT ALL PRIVILEGES ON nxtClass108.* TO 'nxtclass_user'@'%';
-    FLUSH PRIVILEGES;
-    USE nxtClass108;
-    SHOW TABLES;
-EOSQL
-
-echo "✅ Database setup complete!"
-
-# Stop temporary MySQL
-echo "🛑 Stopping temporary MySQL..."
-mysqladmin shutdown
-wait $MYSQL_PID
+# Ensure MySQL and Nginx log directories exist with proper ownership
+mkdir -p /var/log/mysql /var/log/nginx
+chown -R mysql:mysql /var/log/mysql || true
+chown -R www-data:www-data /var/log/nginx || true
 
 # Start all services with supervisor
 echo "🎯 Starting all services with Supervisor..."

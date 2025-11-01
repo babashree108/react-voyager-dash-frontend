@@ -22,7 +22,7 @@ RUN npm run build
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 
-# Copy custom nginx config
+# Copy custom nginx config (relative to frontend/ build context)
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy built assets from builder stage
