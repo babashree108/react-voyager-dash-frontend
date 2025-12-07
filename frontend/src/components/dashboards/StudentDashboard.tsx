@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import StatCard from '@/components/StatCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Stat, ClassSession } from '@/types';
-import { getStudentStats, mockClasses } from '@/data/mockData';
-import { Calendar, Clock, Users, Video } from 'lucide-react';
+import { Stat } from '@/types';
+import { Calendar, Clock, Users, Video, BookOpen, FileText, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface StudentDashboardProps {
@@ -14,15 +13,36 @@ interface StudentDashboardProps {
 
 export default function StudentDashboard({ userName }: StudentDashboardProps) {
   const navigate = useNavigate();
-  const [stats, setStats] = useState<Stat[]>([]);
+  
+  // Placeholder stats - replace with actual API calls later
+  const [stats] = useState<Stat[]>([
+    { label: 'Total Courses', value: '8', change: '+2 this semester', trend: 'up' },
+    { label: 'Assignments', value: '12', change: '3 pending', trend: 'down' },
+    { label: 'Average Grade', value: '85%', change: '+5%', trend: 'up' },
+    { label: 'Attendance', value: '92%', change: 'Good standing', trend: 'up' },
+  ]);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      const statsData = await getStudentStats();
-      setStats(statsData);
-    };
-    fetchStats();
-  }, []);
+  // Placeholder classes - replace with actual API calls later
+  const classes = [
+    {
+      id: 1,
+      title: 'Mathematics',
+      teacher: 'Mr. Smith',
+      status: 'upcoming',
+      date: 'Today',
+      time: '10:00 AM',
+      participants: '25',
+    },
+    {
+      id: 2,
+      title: 'Physics',
+      teacher: 'Dr. Johnson',
+      status: 'upcoming',
+      date: 'Today',
+      time: '2:00 PM',
+      participants: '30',
+    },
+  ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -59,7 +79,7 @@ export default function StudentDashboard({ userName }: StudentDashboardProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {mockClasses.map((classSession) => (
+            {classes.map((classSession) => (
               <div 
                 key={classSession.id}
                 className="p-4 border border-border rounded-lg hover:border-primary/50 transition-smooth cursor-pointer"

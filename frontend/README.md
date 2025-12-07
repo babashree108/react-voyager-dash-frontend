@@ -90,27 +90,6 @@ Create `.env.development` and `.env.production` files:
 VITE_API_URL=http://localhost:8080/api
 ```
 
-## 🐳 Docker
-
-### Build Docker Image
-
-```bash
-docker build -t nxtclass-frontend .
-```
-
-### Run Docker Container
-
-```bash
-docker run -p 80:80 nxtclass-frontend
-```
-
-### Docker Compose
-
-```bash
-# From project root
-docker-compose up frontend
-```
-
 ## 🧪 Testing
 
 ```bash

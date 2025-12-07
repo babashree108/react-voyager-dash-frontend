@@ -4,8 +4,7 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { User } from '@/types';
-import { mockAssignments } from '@/data/mockData';
+import { User, Assignment } from '@/types';
 import { Plus, Calendar, Clock, Award } from 'lucide-react';
 
 export default function Assignments() {
@@ -22,6 +21,35 @@ export default function Assignments() {
   }, [navigate]);
 
   if (!user) return null;
+
+  // Placeholder assignments - replace with actual API calls later
+  const mockAssignments: Assignment[] = [
+    {
+      id: '1',
+      title: 'Mathematics Quiz',
+      subject: 'Mathematics',
+      dueDate: '2025-12-15',
+      status: 'pending',
+      totalPoints: 100,
+    },
+    {
+      id: '2',
+      title: 'Physics Lab Report',
+      subject: 'Physics',
+      dueDate: '2025-12-20',
+      status: 'submitted',
+      totalPoints: 50,
+    },
+    {
+      id: '3',
+      title: 'English Essay',
+      subject: 'English',
+      dueDate: '2025-12-10',
+      status: 'graded',
+      grade: 85,
+      totalPoints: 100,
+    },
+  ];
 
   const getStatusColor = (status: string) => {
     switch (status) {

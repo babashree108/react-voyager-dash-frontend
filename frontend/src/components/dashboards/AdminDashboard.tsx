@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import StatCard from '@/components/StatCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Stat } from '@/types';
-import { getOrgAdminStats } from '@/data/mockData';
-import { Users, Calendar } from 'lucide-react';
+import { Users, Calendar, GraduationCap, UserCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface AdminDashboardProps {
@@ -13,15 +12,14 @@ interface AdminDashboardProps {
 
 export default function AdminDashboard({ userName }: AdminDashboardProps) {
   const navigate = useNavigate();
-  const [stats, setStats] = useState<Stat[]>([]);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      const statsData = await getOrgAdminStats();
-      setStats(statsData);
-    };
-    fetchStats();
-  }, []);
+  
+  // Placeholder stats - replace with actual API calls later
+  const [stats] = useState<Stat[]>([
+    { label: 'Total Students', value: '1,234', change: '+56 this month', trend: 'up' },
+    { label: 'Total Teachers', value: '89', change: '+4', trend: 'up' },
+    { label: 'Active Classes', value: '45', change: '+2', trend: 'up' },
+    { label: 'Attendance Rate', value: '93%', change: '+1%', trend: 'up' },
+  ]);
 
   return (
     <div className="p-8">

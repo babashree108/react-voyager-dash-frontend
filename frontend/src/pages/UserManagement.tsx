@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { User } from '@/types';
-import { mockUsers } from '@/data/mockData';
 import { Search, UserPlus, Edit, Trash2 } from 'lucide-react';
 
 export default function UserManagement() {
@@ -30,7 +29,14 @@ export default function UserManagement() {
 
   if (!user) return null;
 
-  const filteredUsers = mockUsers.filter(u => 
+  // Placeholder users - replace with actual API calls later
+  const users: User[] = [
+    { id: '1', name: 'John Admin', email: 'admin@school.com', role: 'orgadmin', status: 'active' },
+    { id: '2', name: 'Jane Teacher', email: 'teacher@school.com', role: 'teacher', status: 'active' },
+    { id: '3', name: 'Bob Student', email: 'student@school.com', role: 'student', status: 'active' },
+  ];
+
+  const filteredUsers = users.filter(u => 
     u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     u.email.toLowerCase().includes(searchTerm.toLowerCase())
   );

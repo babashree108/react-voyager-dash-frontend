@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/DashboardLayout';
 import StatCard from '@/components/StatCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User } from '@/types';
-import { orgAdminStats, teacherStats } from '@/data/mockData';
+import { User, Stat } from '@/types';
 import { BarChart3 } from 'lucide-react';
 
 export default function Analytics() {
@@ -26,6 +25,21 @@ export default function Analytics() {
   }, [navigate]);
 
   if (!user) return null;
+
+  // Placeholder stats - replace with actual API calls later
+  const orgAdminStats: Stat[] = [
+    { label: 'Total Students', value: '1,234', change: '+56', trend: 'up' },
+    { label: 'Total Teachers', value: '89', change: '+4', trend: 'up' },
+    { label: 'Active Classes', value: '45', change: '+2', trend: 'up' },
+    { label: 'Attendance Rate', value: '93%', change: '+1%', trend: 'up' },
+  ];
+
+  const teacherStats: Stat[] = [
+    { label: 'Total Classes', value: '12', change: '+3', trend: 'up' },
+    { label: 'Total Students', value: '240', change: '+15', trend: 'up' },
+    { label: 'Assignments', value: '8', change: '2 pending', trend: 'down' },
+    { label: 'Avg. Grade', value: '87%', change: '+3%', trend: 'up' },
+  ];
 
   const stats = user.role === 'orgadmin' ? orgAdminStats : teacherStats;
 

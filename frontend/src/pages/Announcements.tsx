@@ -4,8 +4,7 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { User } from '@/types';
-import { mockAnnouncements } from '@/data/mockData';
+import { User, Announcement } from '@/types';
 import { Plus, AlertCircle, Bell } from 'lucide-react';
 
 export default function Announcements() {
@@ -22,6 +21,34 @@ export default function Announcements() {
   }, [navigate]);
 
   if (!user) return null;
+
+  // Placeholder announcements - replace with actual API calls later
+  const mockAnnouncements: Announcement[] = [
+    {
+      id: '1',
+      title: 'School Holiday Notice',
+      content: 'School will be closed on December 25th for Christmas. Classes will resume on December 26th.',
+      author: 'Principal',
+      date: 'December 5, 2025',
+      priority: 'high',
+    },
+    {
+      id: '2',
+      title: 'Parent-Teacher Meeting',
+      content: 'Annual parent-teacher meeting scheduled for December 15th at 3:00 PM in the school auditorium.',
+      author: 'Admin Office',
+      date: 'December 3, 2025',
+      priority: 'medium',
+    },
+    {
+      id: '3',
+      title: 'Library Hours Update',
+      content: 'Library will now open at 8:00 AM instead of 9:00 AM starting next week.',
+      author: 'Librarian',
+      date: 'December 1, 2025',
+      priority: 'low',
+    },
+  ];
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
