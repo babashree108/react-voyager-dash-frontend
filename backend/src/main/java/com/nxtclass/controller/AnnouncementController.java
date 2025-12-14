@@ -69,4 +69,5 @@ public class AnnouncementController {
         }
         return ResponseEntity.notFound().build();
     }
+
 }
