@@ -53,7 +53,7 @@ export default function Students() {
     navigate('/login');
     return null;
   }
-
+    
   const { toast } = useToast();
 
   const handleAction = async (action: string, studentId: number) => {
