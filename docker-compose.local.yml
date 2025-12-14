@@ -1,0 +1,123 @@
+version: '3.8'
+
+# ========================================
+# LOCAL DEVELOPMENT ENVIRONMENT
+# Ports: Frontend 3000, Backend 8080, DB 5432
+# ========================================
+
+services:
+  # PostgreSQL Database - LOCAL
+  # MySQL Database - LOCAL
+  database-local:
+    image: mysql:8.0
+    container_name: nxtclass-db-local
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: nxtclass_local
+      MYSQL_USER: nxtclass
+      MYSQL_PASSWORD: nxtclass
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Kolkata"
+    volumes:
+      - mysql_local_data:/var/lib/mysql
+    ports:
+      - "3307:3306"  # LOCAL DATABASE PORT (host 3307 -> container 3306) to avoid conflicts
+    healthcheck:
+      # mysqladmin requires a password; using root for local dev only
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nxtclass-local-network
+    labels:
+      com.nxtclass.environment: "local"
+      com.nxtclass.service: "database"
+
+  # Spring Boot Backend - LOCAL
+  backend-local:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: nxtclass-backend-local
+    restart: unless-stopped
+    depends_on:
+      database-local:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-local:3306/nxtclass_local?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: nxtclass
+      SPRING_DATASOURCE_PASSWORD: nxtclass
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      JWT_SECRET: local_dev_secret_key_not_for_production_use_only_32_chars_minimum
+      SERVER_PORT: 8080
+      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_LEVEL_COM_NXTCLASS: DEBUG
+    volumes:
+      - ./backend/src:/app/src
+      - maven_local_cache:/root/.m2
+    ports:
+      - "8080:8080"   # LOCAL BACKEND PORT
+      - "5005:5005"   # LOCAL DEBUG PORT
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - nxtclass-local-network
+    labels:
+      com.nxtclass.environment: "local"
+      com.nxtclass.service: "backend"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # React Frontend - LOCAL
+  frontend-local:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: nxtclass-frontend-local
+    restart: unless-stopped
+    depends_on:
+      backend-local:
+        condition: service_healthy
+    environment:
+      VITE_API_URL: http://localhost:8080/api
+      NODE_ENV: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:8081"  # LOCAL FRONTEND PORT (host 3000 -> container 8081 to match Vite config)
+    networks:
+      - nxtclass-local-network
+    labels:
+      com.nxtclass.environment: "local"
+      com.nxtclass.service: "frontend"
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysql_local_data:
+    driver: local
+    labels:
+      com.nxtclass.environment: "local"
+  maven_local_cache:
+    driver: local
+    labels:
+      com.nxtclass.environment: "local"
+
+networks:
+  nxtclass-local-network:
+    driver: bridge
+    name: nxtclass-local-network
+    labels:
+      com.nxtclass.environment: "local"

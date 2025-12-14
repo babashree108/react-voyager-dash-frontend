@@ -1,0 +1,130 @@
+version: '3.8'
+
+# ========================================
+# STAGING ENVIRONMENT
+# Ports: Frontend 4000, Backend 8081, DB 5433
+# ========================================
+
+services:
+  # PostgreSQL Database - STAGING
+  database-staging:
+    image: postgres:15-alpine
+    container_name: nxtclass-db-staging
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-nxtclass_staging}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+      TZ: "Asia/Kolkata"
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # STAGING DATABASE PORT
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nxtclass-staging-network
+    labels:
+      com.nxtclass.environment: "staging"
+      com.nxtclass.service: "database"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # Spring Boot Backend - STAGING
+  backend-staging:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2025-12-07}
+        VERSION: ${VERSION:-staging-latest}
+    image: nxtclass/backend:staging
+    container_name: nxtclass-backend-staging
+    restart: always
+    depends_on:
+      database-staging:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: staging
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database-staging:5432/${DB_NAME:-nxtclass_staging}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: "false"
+      JWT_SECRET: ${JWT_SECRET}
+      SERVER_PORT: 8080
+      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_LEVEL_COM_NXTCLASS: INFO
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics
+    ports:
+      - "8081:8080"  # STAGING BACKEND PORT
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - nxtclass-staging-network
+    labels:
+      com.nxtclass.environment: "staging"
+      com.nxtclass.service: "backend"
+      com.nxtclass.version: "${VERSION:-staging-latest}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # React Frontend - STAGING
+  frontend-staging:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8081/api}
+    image: nxtclass/frontend:staging
+    container_name: nxtclass-frontend-staging
+    restart: always
+    depends_on:
+      backend-staging:
+        condition: service_healthy
+    ports:
+      - "4000:80"  # STAGING FRONTEND PORT
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - nxtclass-staging-network
+    labels:
+      com.nxtclass.environment: "staging"
+      com.nxtclass.service: "frontend"
+      com.nxtclass.version: "${VERSION:-staging-latest}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+volumes:
+  postgres_staging_data:
+    driver: local
+    labels:
+      com.nxtclass.environment: "staging"
+
+networks:
+  nxtclass-staging-network:
+    driver: bridge
+    name: nxtclass-staging-network
+    labels:
+      com.nxtclass.environment: "staging"

@@ -1,0 +1,27 @@
+# Development Dockerfile for NXT Class Backend
+
+FROM maven:3.9-eclipse-temurin-17
+
+WORKDIR /app
+
+# Copy pom.xml for dependency caching
+COPY pom.xml .
+
+# Download dependencies
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+
+# Expose application and debug ports
+EXPOSE 8080 5005
+
+# Enable Spring Boot DevTools. Remote debugging can be enabled from the
+# compose file or the container runtime when required; avoid forcing a
+# debug agent by default in the image to prevent port conflicts.
+ENV SPRING_DEVTOOLS_RESTART_ENABLED=true
+
+# Run with Maven (supports hot reload).
+# Remote debugging is enabled via JAVA_TOOL_OPTIONS above, so avoid passing
+# duplicate jdwp JVM arguments here which cause the VM to fail to initialize.
+CMD ["mvn", "spring-boot:run"]

@@ -1,0 +1,166 @@
+version: '3.8'
+
+# ========================================
+# PRODUCTION ENVIRONMENT
+# Ports: Frontend 5000, Backend 8082, DB 5434
+# ========================================
+
+services:
+  # PostgreSQL Database - PRODUCTION
+  database-prod:
+    image: postgres:15-alpine
+    container_name: nxtclass-db-prod
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=en_US.UTF-8"
+      TZ: "Asia/Kolkata"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - postgres_backup:/backup
+    ports:
+      - "5434:5432"  # PRODUCTION DATABASE PORT
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nxtclass-prod-network
+    labels:
+      com.nxtclass.environment: "production"
+      com.nxtclass.service: "database"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  # Spring Boot Backend - PRODUCTION
+  backend-prod:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE}
+        VERSION: ${VERSION:-v1.0.0}
+    image: nxtclass/backend:${VERSION:-v1.0.0}
+    container_name: nxtclass-backend-prod
+    restart: always
+    depends_on:
+      database-prod:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database-prod:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: "false"
+      JWT_SECRET: ${JWT_SECRET}
+      SERVER_PORT: 8080
+      LOGGING_LEVEL_ROOT: WARN
+      LOGGING_LEVEL_COM_NXTCLASS: INFO
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics,prometheus
+      # Security settings
+      SERVER_TOMCAT_MAX_THREADS: 200
+      SERVER_TOMCAT_MIN_SPARE_THREADS: 10
+      # Database connection pool
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: 20
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: 5
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: 30000
+    ports:
+      - "8082:8080"  # PRODUCTION BACKEND PORT
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    networks:
+      - nxtclass-prod-network
+    labels:
+      com.nxtclass.environment: "production"
+      com.nxtclass.service: "backend"
+      com.nxtclass.version: "${VERSION:-v1.0.0}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '2'
+          memory: 2G
+
+  # React Frontend - PRODUCTION
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    image: nxtclass/frontend:${VERSION:-v1.0.0}
+    container_name: nxtclass-frontend-prod
+    restart: always
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+    ports:
+      - "5000:80"  # PRODUCTION FRONTEND PORT
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - nxtclass-prod-network
+    labels:
+      com.nxtclass.environment: "production"
+      com.nxtclass.service: "frontend"
+      com.nxtclass.version: "${VERSION:-v1.0.0}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+volumes:
+  postgres_prod_data:
+    driver: local
+    labels:
+      com.nxtclass.environment: "production"
+  postgres_backup:
+    driver: local
+    labels:
+      com.nxtclass.environment: "production"
+
+networks:
+  nxtclass-prod-network:
+    driver: bridge
+    name: nxtclass-prod-network
+    labels:
+      com.nxtclass.environment: "production"

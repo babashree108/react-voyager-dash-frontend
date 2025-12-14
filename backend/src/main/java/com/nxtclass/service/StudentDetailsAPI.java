@@ -29,11 +29,12 @@ public class StudentDetailsAPI {
         StudentDetails entity = (dto.getIdentifier() != null)
                 ? repo.findById(dto.getIdentifier()).orElse(new StudentDetails())
                 : new StudentDetails();
-        entity.setFName(dto.getFName());
-        entity.setLName(dto.getLName());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
         entity.setPhoneNo(dto.getPhoneNo());
-        entity.setGrade(dto.getGrade());
+        entity.setGradeIdentifier(dto.getGradeIdentifier());
+        entity.setSectionIdentifier(dto.getSectionIdentifier());
         entity.setLecture(dto.getLecture());
         entity.setAddress1(dto.getAddress1());
         entity.setAddress2(dto.getAddress2());
