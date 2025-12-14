@@ -113,6 +113,7 @@ export default function AddStudent() {
                       onChange={handleChange}
                       required
                     />
+                    
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
