@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Stat } from '@/types';
 import { Users, Calendar, GraduationCap, UserCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+ 
 interface AdminDashboardProps {
   userName: string;
 }
@@ -20,7 +20,7 @@ export default function AdminDashboard({ userName }: AdminDashboardProps) {
     { label: 'Active Classes', value: '45', change: '+2', trend: 'up' },
     { label: 'Attendance Rate', value: '93%', change: '+1%', trend: 'up' },
   ]);
-
+ 
   return (
     <div className="p-8">
       <div className="mb-8">

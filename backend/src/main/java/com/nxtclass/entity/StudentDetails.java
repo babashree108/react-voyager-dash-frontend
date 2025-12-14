@@ -10,11 +10,9 @@ import lombok.Setter;
 @Getter
 public class StudentDetails extends BaseDomain{
 
-        @Column(name = "f_name")
-        private String fName;
+        private String firstName;
 
-        @Column(name = "l_name")
-        private String lName;
+        private String lastName;
 
         @Column(name = "email")
         private String email;

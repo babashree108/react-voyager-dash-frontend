@@ -31,6 +31,7 @@ com/nxtclass/dto/AuthResponse.class
 com/nxtclass/entity/UserRole.class
 com/nxtclass/service/TeacherDetailsAPI.class
 com/nxtclass/repository/TeacherGradeSectionRepo.class
+com/nxtclass/config/CorsConfig.class
 com/nxtclass/entity/Subject.class
 com/nxtclass/dto/UserDto.class
 com/nxtclass/entity/Announcement.class
