@@ -1,5 +1,6 @@
 package com.nxtclass.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,9 @@ public class BaseDTO {
 
     private Long identifier;
 
-    private String fName;
+    private String firstName;
 
-    private String lName;
+    private String lastName;
 
     private String email;
 

@@ -32,8 +32,8 @@ public class TeacherDetailsAPI {
         TeacherDetails entity = (dto.getIdentifier() != null)
                 ? repo.findById(dto.getIdentifier()).orElse(new TeacherDetails())
                 : new TeacherDetails();
-        entity.setFName(dto.getFName());
-        entity.setLName(dto.getLName());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
         entity.setPhoneNo(dto.getPhoneNo());
         entity.setAddress1(dto.getAddress1());

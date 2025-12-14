@@ -53,5 +53,6 @@
 /Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/controller/UserController.java
 /Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/controller/AuthController.java
 /Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/dto/UserSummary.java
+/Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/config/CorsConfig.java
 /Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/dto/TeacherGradeSectionDTO.java
 /Users/shivamraj/School_Project_06_2023_Khwab/react-voyager-dash-frontend/backend/src/main/java/com/nxtclass/controller/AssignmentController.java
