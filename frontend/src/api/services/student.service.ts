@@ -2,8 +2,8 @@ import { ApiService } from './api.service';
 
 export interface StudentDetails {
   identifier?: number;
-  fName: string;
-  lName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phoneNo: string;
   gradeIdentifier?: number | null;

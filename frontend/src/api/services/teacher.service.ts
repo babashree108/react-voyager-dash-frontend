@@ -2,8 +2,8 @@ import { ApiService } from './api.service';
 
 export interface TeacherDetails {
   identifier?: number;
-  fName: string;
-  lName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phoneNo: string;
   address1: string;

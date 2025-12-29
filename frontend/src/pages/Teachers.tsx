@@ -138,7 +138,7 @@ export default function Teachers() {
                 teachers.map((teacher: any) => (
                   <TableRow key={teacher.identifier}>
                     <TableCell>
-                      {teacher.fName} {teacher.lName || ''}
+                      {teacher.firstName} {teacher.lastName || ''}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-col">

@@ -18,8 +18,8 @@ export default function StudentForm() {
 
   interface StudentFormData {
     identifier: number | null;
-    fName: string;
-    lName: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phoneNo: string;
     gradeIdentifier?: number | null;
@@ -35,8 +35,8 @@ export default function StudentForm() {
 
   const [formData, setFormData] = useState<StudentFormData>({
     identifier: null,
-    fName: '',
-    lName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phoneNo: '',
     gradeIdentifier: null,
@@ -193,23 +193,23 @@ export default function StudentForm() {
                   <h3 className="text-lg font-medium">Personal Information</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="fName">First Name</Label>
+                      <Label htmlFor="firstName">First Name</Label>
                       <Input
-                        id="fName"
-                        name="fName"
+                        id="firstName"
+                        name="firstName"
                         placeholder="Enter first name"
-                        value={formData.fName}
+                        value={formData.firstName}
                         onChange={handleChange}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lName">Last Name</Label>
+                      <Label htmlFor="lastName">Last Name</Label>
                       <Input
-                        id="lName"
-                        name="lName"
+                        id="lastName"
+                        name="lastName"
                         placeholder="Enter last name"
-                        value={formData.lName}
+                        value={formData.lastName}
                         onChange={handleChange}
                         required
                       />
