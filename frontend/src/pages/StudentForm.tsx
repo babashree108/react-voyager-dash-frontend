@@ -19,7 +19,7 @@ export default function StudentForm() {
   interface StudentFormData {
     identifier: number | null;
     firstName: string;
-    lName: string;
+    lastName: string;
     email: string;
     phoneNo: string;
     gradeIdentifier?: number | null;
@@ -36,7 +36,7 @@ export default function StudentForm() {
   const [formData, setFormData] = useState<StudentFormData>({
     identifier: null,
     firstName: '',
-    lName: '',
+    lastName: '',
     email: '',
     phoneNo: '',
     gradeIdentifier: null,
@@ -204,12 +204,12 @@ export default function StudentForm() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lName">Last Name</Label>
+                      <Label htmlFor="lastName">Last Name</Label>
                       <Input
-                        id="lName"
-                        name="lName"
+                        id="lastName"
+                        name="lastName"
                         placeholder="Enter last name"
-                        value={formData.lName}
+                        value={formData.lastName}
                         onChange={handleChange}
                         required
                       />

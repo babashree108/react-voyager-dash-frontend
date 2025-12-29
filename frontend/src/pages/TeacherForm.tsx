@@ -20,7 +20,7 @@ export default function TeacherForm() {
   const [formData, setFormData] = useState<TeacherDetails>({
     identifier: undefined,
     firstName: '',
-    lName: '',
+    lastName: '',
     email: '',
     phoneNo: '',
     address1: '',
@@ -192,12 +192,12 @@ export default function TeacherForm() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lName">Last Name</Label>
+                      <Label htmlFor="lastName">Last Name</Label>
                       <Input
-                        id="lName"
-                        name="lName"
+                        id="lastName"
+                        name="lastName"
                         placeholder="Enter last name"
-                        value={formData.lName}
+                        value={formData.lastName}
                         onChange={handleChange}
                         required
                       />

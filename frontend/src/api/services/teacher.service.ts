@@ -3,7 +3,7 @@ import { ApiService } from './api.service';
 export interface TeacherDetails {
   identifier?: number;
   firstName: string;
-  lName: string;
+  lastName: string;
   email: string;
   phoneNo: string;
   address1: string;

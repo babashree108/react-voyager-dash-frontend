@@ -12,7 +12,7 @@ export default function AddStudent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
-    lName: '',
+    lastName: '',
     email: '',
     phoneNo: '',
     grade: '',
@@ -104,12 +104,12 @@ export default function AddStudent() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lName">Last Name</Label>
+                    <Label htmlFor="lastName">Last Name</Label>
                     <Input
-                      id="lName"
-                      name="lName"
+                      id="lastName"
+                      name="lastName"
                       placeholder="Enter last name"
-                      value={formData.lName}
+                      value={formData.lastName}
                       onChange={handleChange}
                       required
                     />
